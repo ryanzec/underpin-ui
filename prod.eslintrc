@@ -1,0 +1,47 @@
+{
+  "extends": "rapid7/browser",
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module"
+  },
+  "globals": {
+    "require": true,
+    "module": true,
+    "setTimeout": true,
+    "window": true,
+    "document": true,
+    "console": true,
+    "confirm": true,
+    "_": true,
+    "UAParser": true,
+    "process": true,
+    "requestAnimationFrame": true,
+    "global": true,
+    "localStorage": true,
+    "sessionStorage": true
+  },
+  "rules": {
+    // NOTE: useful for see variables that can be removed
+    "no-unused-vars": [2, {"ignoreRestSiblings": true}],
+
+    // NOTE: useful for being to to move items in list around easy
+    "comma-dangle": [2, "always-multiline"],
+
+    // NOTE: using warn / error is useful for development and remove during build process for production
+    "no-console": [2, {"allow": ["warn", "error"]}],
+
+    // NOTE: children is always a props from react itself so no reason to define the prop type when using it
+    "react/prop-types": [2, {"ignore": ["children"]}],
+
+    // NOTE: useful for styled components
+    "arrow-parens": [2, "as-needed", {"requireForBlockBody": true}],
+    "arrow-body-style": [0],
+
+    // NOTE: needed for globalInject of styled components
+    "no-unused-expressions": [2, {"allowTaggedTemplates": true}],
+
+    // NOTE: I personally file this easier to read
+    "operator-linebreak": [2, "before"]
+  }
+}

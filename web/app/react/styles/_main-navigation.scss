@@ -1,0 +1,30 @@
+$component-identifier: '.main-navigation';
+
+#{$component-identifier} {
+  @include flexbox-value-width(250px);
+
+  border-right: 1px solid $border-color;
+  padding: $spacing-extra-small;
+
+  .expandable-list:not(:last-child) {
+    margin-bottom: $spacing-small;
+  }
+
+  .list__item {
+    // NOTE: note using `padding` so I don't overwrite or have to copy default properties
+    padding-top: $spacing-extra-tiny;
+    padding-bottom: $spacing-extra-tiny;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $color-gray3;
+    }
+
+    .svg-icon__outer-container {
+      padding-right: 8px;
+      align-self: center;
+    }
+  }
+}
+
+$component-identifier: '';

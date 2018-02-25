@@ -1,0 +1,58 @@
+{
+  "env": {
+    "development": {
+      "plugins": [
+        "styled-components",
+        "transform-runtime",
+        "static-fs"
+      ],
+      "presets": [
+        [
+          "env",
+          {
+            "loose": true,
+            "modules": false
+          }
+        ],
+        "react",
+        "stage-2"
+      ]
+    },
+    "production": {
+      "plugins": [
+        "styled-components",
+        "transform-runtime",
+        "static-fs",
+        "transform-react-constant-elements",
+        "transform-react-inline-elements",
+        "transform-react-remove-prop-types"
+      ],
+      "presets": [
+        [
+          "env",
+          {
+            "loose": true,
+            "modules": false
+          }
+        ],
+        "react",
+        "stage-2"
+      ]
+    },
+    "test": {
+      "plugins": [
+        "styled-components"
+      ],
+      "presets": [
+        [
+          "env",
+          {
+            "loose": true
+          }
+        ],
+        "react",
+        "stage-2"
+      ]
+    }
+  }
+}

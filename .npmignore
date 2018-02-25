@@ -1,0 +1,17 @@
+coverage
+tasks
+test
+ui-tests
+web
+.babelrc
+.editorconfig
+.eslintignore
+.eslintrc
+.git
+.gitignore
+.npmignore
+build-compressed
+build-developer
+webpack.config.compressed.js
+webpack.config.developer.js
+npm.debug.loG

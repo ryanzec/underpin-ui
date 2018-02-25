@@ -1,0 +1,33 @@
+//HACK: There seems to be issue with FireFox and IE and setting the flex width to a specific value(50%, 25px) instead of just a size flex value. this mixin
+//HACK: resolves that issue by add a max-width.
+@mixin flexbox-value-width($width) {
+  flex: 0 0 $width;
+  max-width: $width;
+}
+
+//HACK: There seems to be issue with FireFox and IE and setting the flex width to a specific value(50%, 25px) instead of just a size flex value. this mixin
+//HACK: resolves that issue by add a max-width.
+@mixin flexbox-value-height($height) {
+  flex: 0 0 $height;
+  max-height: $height;
+}
+
+@mixin border-left-radius($radius) {
+  border-top-left-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+
+@mixin border-right-radius($radius) {
+  border-top-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+}
+
+@mixin border-top-radius($radius) {
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+}
+
+@mixin border-bottom-radius($radius) {
+  border-bottom-left-radius: $radius;
+  border-bottom-right-radius: $radius;
+}

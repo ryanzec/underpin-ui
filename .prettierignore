@@ -1,0 +1,6 @@
+# vscode files
+jsconfig.json
+package.json
+
+# auto generated files that don't need to be touched
+test/i18n-node.js

@@ -1,0 +1,8 @@
+# third party libraries
+src/javascript/prism.js
+
+# auto generated files
+test/i18n-node.js
+
+# misc
+webpack.config.js
