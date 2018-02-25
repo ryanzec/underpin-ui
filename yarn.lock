@@ -5257,7 +5257,7 @@ messageformat-parser@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/messageformat-parser/-/messageformat-parser-1.1.0.tgz#13ba2250a76bbde8e0fca0dbb3475f95c594a90a"
 
-messageformat@1.1.1, messageformat@^1.0.2:
+messageformat@^1.0.2:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/messageformat/-/messageformat-1.1.1.tgz#ceaa2e6c86929d4807058275a7372b1bd963bdf6"
   dependencies:
