@@ -6,6 +6,7 @@ There are some key used within the changelog which are as following:
 
 # IN PROGRESS
 
+* added context menu example using the popover components #11
 * added ability to hide example chrome #8
 
 ## 0.1.0
