@@ -30,6 +30,7 @@ class PopoversPage extends React.Component {
       isActive: false,
       isActive2: false,
       isActiveDD: false,
+      isActiveContextMenu: false,
     };
   }
 
@@ -66,6 +67,21 @@ class PopoversPage extends React.Component {
   onClickOutsideDD = () => {
     this.setState({
       isActiveDD: false,
+    });
+  };
+
+  onClickPopoverContextMenu = (event) => {
+    // prevents the normal right click context menu from showing
+    event.preventDefault();
+
+    this.setState({
+      isActiveContextMenu: !this.state.isActiveContextMenu,
+    });
+  };
+
+  onClickOutsideContentMenu = () => {
+    this.setState({
+      isActiveContextMenu: false,
     });
   };
 
@@ -106,7 +122,30 @@ class PopoversPage extends React.Component {
         onClickOutside={this.onClickOutsideDD}
         placement="top-start"
       >
-        <PopoverHandle onClick={this.onClickPopoverDD}>drop down</PopoverHandle>
+        <PopoverHandle onClick={this.onClickPopoverContextMenu}>drop down</PopoverHandle>
+        <DropDownMenu>
+          <DropDownMenuHeader>Welcome John Doe</DropDownMenuHeader>
+          <DropDownMenuDivider />
+          <DropDownMenuItem>Your profile</DropDownMenuItem>
+          <DropDownMenuItem>Explore</DropDownMenuItem>
+          <DropDownMenuItem>Intergerations</DropDownMenuItem>
+          <DropDownMenuItem>Help</DropDownMenuItem>
+          <DropDownMenuDivider />
+          <DropDownMenuItem>Settings</DropDownMenuItem>
+          <DropDownMenuItem>Log out</DropDownMenuItem>
+        </DropDownMenu>
+      </PopoverContainer>
+    );
+  }
+
+  renderPopoverContentMenu() {
+    return (
+      <PopoverContainer
+        isActive={this.state.isActiveContextMenu}
+        onClickOutside={this.onClickOutsideContextMenu}
+        placement="top-start"
+      >
+        <PopoverHandle onContextMenu={this.onClickPopoverContextMenu}>drop down</PopoverHandle>
         <DropDownMenu>
           <DropDownMenuHeader>Welcome John Doe</DropDownMenuHeader>
           <DropDownMenuDivider />
@@ -134,7 +173,10 @@ class PopoversPage extends React.Component {
         <br />
         <br />
         <br />
-        <div>A popover can be a {this.renderPopoverDD()}, it just have specific styling.</div>
+        <div>
+          A popover can be a {this.renderPopoverDD()}, it just have specific styling (same thing can be used as{' '}
+          {this.renderPopoverContentMenu()} when right clicking).
+        </div>
       </div>
     );
   }
