@@ -1,13 +1,14 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
-import {routerReducer} from 'react-router-redux';
+import {routerReducer, routerMiddleware} from 'react-router-redux';
 
+import history from 'app/history';
 import menu from './stores/menu/menuReducer';
 import application from './stores/application/applicationReducer';
 import applicationNotifications from 'src/stores/applicationNotifications/applicationNotificationsReducer';
 import dynamicallyLoadingComponents from './stores/dynamicallyLoadingComponents/dynamicallyLoadingComponents.reducer';
 
-const reduxMiddleware = [thunk];
+const reduxMiddleware = [thunk, routerMiddleware(history)];
 
 if (process.env.NODE_ENV !== 'production') {
   const reduxFreeze = require('redux-freeze');
@@ -20,7 +21,7 @@ const reducers = combineReducers({
   application,
   applicationNotifications,
   dynamicallyLoadingComponents,
-  routing: routerReducer,
+  router: routerReducer,
 });
 const middleware = applyMiddleware(...reduxMiddleware);
 
