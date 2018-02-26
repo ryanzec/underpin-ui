@@ -130,9 +130,9 @@
     "test": "NODE_PATH=. NODE_ENV=test ./node_modules/.bin/ava --verbose",
     "test:watch": "NODE_PATH=. NODE_ENV=test ./node_modules/.bin/ava --verbose --watch",
     "test:update": "NODE_PATH=. NODE_ENV=test ./node_modules/.bin/ava --verbose --update-snapshots",
-    "webpack": "yarn && NODE_ENV=developer ./node_modules/.bin/webpack --progress --config webpack.config.js",
-    "webpack:production": "yarn && NODE_ENV=production WEBPACK_PRODUCTION_BUILD=1 ./node_modules/.bin/webpack --progress --config webpack.config.js",
-    "webpack:watch": "yarn && NODE_ENV=development ./node_modules/.bin/webpack --progress --config webpack.config.js --watch"
+    "webpack": "yarn clean && yarn && NODE_ENV=developer ./node_modules/.bin/webpack --progress --config webpack.config.js",
+    "webpack:production": "yarn clean && yarn && NODE_ENV=production WEBPACK_PRODUCTION_BUILD=1 ./node_modules/.bin/webpack --progress --config webpack.config.js",
+    "webpack:watch": "yarn clean && yarn && NODE_ENV=development ./node_modules/.bin/webpack --progress --config webpack.config.js --watch"
   },
   "version": "0.1.0"
 }
