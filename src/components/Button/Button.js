@@ -35,7 +35,7 @@ export const hoverStyles = (props) => {
       ? buttonCss.variables.backgroundColorHover
       : buttonCss.variables[`backgroundColor${capitalize(props.styleType)}Hover`];
 
-  return `
+  return css`
     &:hover {
       background-color: ${backgroundHoverColor};
       border-color: ${backgroundHoverColor};
@@ -53,9 +53,11 @@ export const fillStyles = (props) => {
     ? buttonCss.variables[`backgroundColor${capitalize(props.styleType)}`]
     : buttonCss.variables.backgroundColor;
 
-  return `
-    ${props.styleType !== 'link' ? `border: 2px solid ${backgroundColor};` : ''}
-    ${cssUtils.fillColors(buttonCss.variables.colorLight, backgroundColor)}
+  return css`
+    ${props.styleType !== 'link' ? `border: 2px solid ${backgroundColor};` : ''} ${cssUtils.fillColors(
+  buttonCss.variables.colorLight,
+  backgroundColor
+)};
   `;
 };
 
@@ -70,8 +72,8 @@ export const thinStyles = (props) => {
     backgroundColor = buttonCss.variables[`backgroundColor${capitalize(props.styleType)}`];
   }
 
-  return `
-    ${cssUtils.thinColors(backgroundColor)}
+  return css`
+    ${cssUtils.thinColors(backgroundColor)};
   `;
 };
 
@@ -80,7 +82,7 @@ export const linkStyles = (props) => {
     return '';
   }
 
-  return `
+  return css`
     background-color: ${themesCss.light.global.transparent};
     color: ${themesCss.light.application.textLinkColor};
     padding: 0;
@@ -91,6 +93,9 @@ export const linkStyles = (props) => {
   `;
 };
 
+/**
+ * A Button...
+ */
 export const Button = styled.button`
   ${generateBaseStyles}
   ${hoverStyles}
