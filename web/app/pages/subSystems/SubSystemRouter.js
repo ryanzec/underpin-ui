@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {Switch, Route} from 'react-router';
+import {Route} from 'react-router';
 
 import ApplicationNotificationsPage from './ApplicationNotificationsPage';
 
