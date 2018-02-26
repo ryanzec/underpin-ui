@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 import * as buttonCss from 'src/components/Button/internal/buttonCss';
-import * as cssUtils from 'src/utils/css';
 
 import Button from 'src/components/Button/Button';
 
@@ -11,11 +10,11 @@ export const baseContainerStyles = () => {
     border-radius: 0;
 
     &:first-child {
-      ${cssUtils.borderRadius('left', buttonCss.variables.borderRadius)}
+      border-radius: ${buttonCss.variables.borderRadius} 0 0 ${buttonCss.variables.borderRadius};
     }
 
     &:last-child {
-      ${cssUtils.borderRadius('right', buttonCss.variables.borderRadius)}
+      border-radius: 0 ${buttonCss.variables.borderRadius} ${buttonCss.variables.borderRadius} 0;
     }
   `;
 };
