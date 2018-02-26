@@ -1,7 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
+
+import StyleGuideRouter from 'app/pages/styleGuide/StyleGuideRouter';
+import SubSystemRouter from 'app/pages/subSystems/SubSystemRouter';
+import ShowcaseRouter from 'app/pages/showcase/ShowcaseRouter';
+
+import CodePage from 'app/pages/styleGuide/CodePage';
+import NotFoundPage from 'app/react/components/NotFoundPage';
 
 import {toggleChrome} from 'app/stores/application/applicationActions';
 
@@ -47,8 +55,45 @@ class Application extends React.Component {
   };
 
   onToggleChrome = () => {
-    console.log('test');
     this.props.toggleChrome();
+  };
+
+  routerIndexRedirectRender = () => {
+    return (
+      /* eslint-workaround */
+      <Redirect
+        component={CodePage}
+        to="/style-guide/code"
+      />
+    );
+  };
+
+  renderRouter = () => {
+    return (
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={this.routerIndexRedirectRender}
+        />
+        <Route
+          component={StyleGuideRouter}
+          path="/style-guide"
+        />
+        <Route
+          component={SubSystemRouter}
+          path="/sub-systems"
+        />
+        <Route
+          component={ShowcaseRouter}
+          path="/showcase"
+        />
+        <Route
+          component={NotFoundPage}
+          path="*"
+        />
+      </Switch>
+    );
   };
 
   renderHeader() {
@@ -80,7 +125,7 @@ class Application extends React.Component {
   }
 
   renderContent() {
-    return <div className="application-container__main-content">{this.props.children}</div>;
+    return <div className="application-container__main-content">{this.renderRouter()}</div>;
   }
 
   renderMenu() {
@@ -130,4 +175,4 @@ class Application extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Application);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Application));

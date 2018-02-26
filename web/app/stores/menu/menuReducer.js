@@ -136,11 +136,6 @@ export const INITIAL_STATE = {
       display: 'Showcase',
       items: [
         {
-          id: 'showcase-algorithms',
-          display: 'Algorithms',
-          to: '/showcase/algorithms',
-        },
-        {
           id: 'showcase-dynamically-loading-components',
           display: 'Dynamically Loading Components',
           to: '/showcase/dynamically-loading-components',
@@ -149,11 +144,6 @@ export const INITIAL_STATE = {
           id: 'showcase-kanban-board',
           display: 'Kanban Board',
           to: '/showcase/kanban-board',
-        },
-        {
-          id: 'showcase-svg-map',
-          display: 'SVG Map',
-          to: '/showcase/svg-map',
         },
       ],
     },

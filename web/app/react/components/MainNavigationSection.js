@@ -16,33 +16,32 @@ class MainNavigationSection extends React.Component {
     return cssClasses;
   }
 
-  onClickMenuItem = event => {
+  onClickMenuItem = (event) => {
     if (event.currentTarget.getAttribute('data-to')) {
-      this.context.router.push(event.currentTarget.getAttribute('data-to'));
+      this.context.router.history.push(event.currentTarget.getAttribute('data-to'));
     }
   };
 
   renderItems() {
-    var itemNodes = [];
+    let itemNodes = [];
 
     if (this.props.items.length > 0) {
       this.props.items.forEach((item) => {
-        var svgIconNode = null;
+        let svgIconNode = null;
 
         if (item.icon) {
-          svgIconNode = (
-            <SvgIcon icon={item.icon} />
-          );
+          svgIconNode = <SvgIcon icon={item.icon} />;
         }
 
         itemNodes.push(
           <ListItem
-            key={item.id}
             data-to={item.to}
-            onClick={this.onClickMenuItem}
             isExpandable
+            key={item.id}
+            onClick={this.onClickMenuItem}
           >
-            {svgIconNode}{item.display}
+            {svgIconNode}
+            {item.display}
           </ListItem>
         );
       });
@@ -52,28 +51,24 @@ class MainNavigationSection extends React.Component {
   }
 
   render() {
-    return (
-      <ExpandableList handleNode={this.props.headerNode}>
-        {this.renderItems()}
-      </ExpandableList>
-    );
+    return <ExpandableList handleNode={this.props.headerNode}>{this.renderItems()}</ExpandableList>;
   }
 }
 
 MainNavigationSection.propTypes = {
   className: PropTypes.string,
   headerNode: PropTypes.node.isRequired,
-  items: PropTypes.array.isRequired
+  items: PropTypes.array.isRequired,
 };
 
 MainNavigationSection.contextTypes = {
-  router: PropTypes.object
+  router: PropTypes.object,
 };
 
 MainNavigationSection.defaultProps = {
   className: null,
   headerNode: null,
-  items: []
+  items: [],
 };
 
-export default MainNavigationSection
+export default MainNavigationSection;
