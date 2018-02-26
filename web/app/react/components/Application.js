@@ -4,10 +4,9 @@ import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 
-// TODO: should I have each section control its own routes
-import {routes as styleGuideRoutes} from 'app/pages/styleGuide/module';
-import {routes as subSystemsRoutes} from 'app/pages/subSystems/module';
-import {routes as showcaseRoutes} from 'app/pages/showcase/module';
+import StyleGuideRouter from 'app/pages/styleGuide/StyleGuideRouter';
+import SubSystemRouter from 'app/pages/subSystems/SubSystemRouter';
+import ShowcaseRouter from 'app/pages/showcase/ShowcaseRouter';
 
 import CodePage from 'app/pages/styleGuide/CodePage';
 import NotFoundPage from 'app/react/components/NotFoundPage';
@@ -56,7 +55,6 @@ class Application extends React.Component {
   };
 
   onToggleChrome = () => {
-    console.log('test');
     this.props.toggleChrome();
   };
 
@@ -78,9 +76,18 @@ class Application extends React.Component {
           path="/"
           render={this.routerIndexRedirectRender}
         />
-        {styleGuideRoutes}
-        {subSystemsRoutes}
-        {showcaseRoutes}
+        <Route
+          component={StyleGuideRouter}
+          path="/style-guide"
+        />
+        <Route
+          component={SubSystemRouter}
+          path="/sub-systems"
+        />
+        <Route
+          component={ShowcaseRouter}
+          path="/showcase"
+        />
         <Route
           component={NotFoundPage}
           path="*"
