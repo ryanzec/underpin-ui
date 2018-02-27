@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import * as themesCss from 'src/styles/themes';
 import * as formCss from 'src/components/Form/internal/formCss';
@@ -13,5 +14,9 @@ export const FormRequiredIcon = styled(SvgIcon)`
   left: 3px;
   top: -5px;
 `;
+
+FormRequiredIcon.propTypes = {
+  icon: PropTypes.string.isRequired,
+};
 
 export default FormRequiredIcon;

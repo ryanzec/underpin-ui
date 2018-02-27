@@ -1,12 +1,19 @@
 {
   "compilerOptions": {
-    "outDir": "./es5/",
+    "baseUrl": ".",
+    "moduleResolution": "node",
+    "module": "es2015",
     "sourceMap": true,
     "noImplicitAny": true,
-    "module": "esnext",
-    "moduleResolution": "node",
     "target": "es5",
     "jsx": "react",
-    "allowJs": true
-  }
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "src/*": ["./src/*"],
+      "app/*": ["./web/app/*"]
+    }
+  },
+  //"include": ["./src/**/*", "./web/app/**/*"],
+  "exclude": ["node_modules"]
 }

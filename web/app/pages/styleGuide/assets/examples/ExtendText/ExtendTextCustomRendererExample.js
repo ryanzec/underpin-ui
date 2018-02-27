@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import axios from 'axios';
-import debounce from 'lodash/debounce';
+import {debounce} from 'lodash';
 import {API_URL} from 'app/constants/api';
 import * as arrayUtils from 'src/utils/array';
 

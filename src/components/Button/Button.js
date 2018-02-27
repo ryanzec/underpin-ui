@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled, {css} from 'styled-components';
-import capitalize from 'lodash/capitalize';
+import {capitalize} from 'lodash';
 
 import * as structureCss from 'src/styles/structure';
 import * as themesCss from 'src/styles/themes';

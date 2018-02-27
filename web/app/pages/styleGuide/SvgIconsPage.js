@@ -7,22 +7,6 @@ import DefaultExample from './assets/examples/SvgIcons/SvgIconsDefaultExample';
 import StylesExample from './assets/examples/SvgIcons/SvgIconsStylesExample';
 import IndicatorsExample from './assets/examples/SvgIcons/SvgIconsIndicatorsExample';
 
-import {readFileSync} from 'fs';
-import {join} from 'path';
-
-const defaultExampleContent = readFileSync(
-  join(__dirname, '/assets/examples/SvgIcons/SvgIconsDefaultExample.js'),
-  'utf8'
-);
-const stylesExampleContent = readFileSync(
-  join(__dirname, '/assets/examples/SvgIcons/SvgIconsStylesExample.js'),
-  'utf8'
-);
-const indicatorsExampleContent = readFileSync(
-  join(__dirname, '/assets/examples/SvgIcons/SvgIconsIndicatorsExample.js'),
-  'utf8'
-);
-
 class SvgIconsPage extends React.Component {
   constructor(props) {
     super(props);
@@ -35,17 +19,17 @@ class SvgIconsPage extends React.Component {
         <h1>SVG Icons</h1>
         <h4>Default</h4>
         <CodeExample
-          codeContent={defaultExampleContent}
+          codeContent=""
           exampleComponent={DefaultExample}
         />
         <h4>Styles</h4>
         <CodeExample
-          codeContent={stylesExampleContent}
+          codeContent=""
           exampleComponent={StylesExample}
         />
         <h4>Indicators</h4>
         <CodeExample
-          codeContent={indicatorsExampleContent}
+          codeContent=""
           exampleComponent={IndicatorsExample}
         />
       </div>

@@ -19,44 +19,44 @@ class OverlaysPage extends React.Component {
     this.state = {
       isOverlayActive: false,
       isAbsoluteOverlayActive: false,
-      isAbsoluteOverlayWithTextActive: false
+      isAbsoluteOverlayWithTextActive: false,
     };
   }
 
   onClickDefault = () => {
     this.setState({
-      isOverlayActive: true
+      isOverlayActive: true,
     });
 
-    setTimeout(function() {
+    setTimeout(() => {
       this.setState({
-        isOverlayActive: false
+        isOverlayActive: false,
       });
-    }.bind(this), 2000);
+    }, 2000);
   };
 
   onClickAbsolute = () => {
     this.setState({
-      isAbsoluteOverlayActive: true
+      isAbsoluteOverlayActive: true,
     });
 
-    setTimeout(function() {
+    setTimeout(() => {
       this.setState({
-        isAbsoluteOverlayActive: false
+        isAbsoluteOverlayActive: false,
       });
-    }.bind(this), 2000);
+    }, 2000);
   };
 
   onClickAbsoluteWithText = () => {
     this.setState({
-      isAbsoluteOverlayWithTextActive: true
+      isAbsoluteOverlayWithTextActive: true,
     });
 
-    setTimeout(function() {
+    setTimeout(() => {
       this.setState({
-        isAbsoluteOverlayWithTextActive: false
+        isAbsoluteOverlayWithTextActive: false,
       });
-    }.bind(this), 2000);
+    }, 2000);
   };
 
   render() {
@@ -64,14 +64,14 @@ class OverlaysPage extends React.Component {
       <div className="p-style-guide-overlays">
         <h1>Overlays</h1>
         <Button onClick={this.onClickDefault}>Full Page</Button>
-        <Overlay isActive={this.state.isOverlayActive}/>
+        <Overlay isActive={this.state.isOverlayActive} />
         <OverlayContainerStyled>
-            <Button onClick={this.onClickAbsolute}>Specific Element Page</Button>
-            <OverlayAbsolute isActive={this.state.isAbsoluteOverlayActive} />
+          <Button onClick={this.onClickAbsolute}>Specific Element Page</Button>
+          <OverlayAbsolute isActive={this.state.isAbsoluteOverlayActive} />
         </OverlayContainerStyled>
         <OverlayContainerStyled>
-            <Button onClick={this.onClickAbsoluteWithText}>Specific Element Page With Overlay Text</Button>
-            <OverlayAbsolute isActive={this.state.isAbsoluteOverlayWithTextActive}>I am text</OverlayAbsolute>
+          <Button onClick={this.onClickAbsoluteWithText}>Specific Element Page With Overlay Text</Button>
+          <OverlayAbsolute isActive={this.state.isAbsoluteOverlayWithTextActive}>I am text</OverlayAbsolute>
         </OverlayContainerStyled>
       </div>
     );
@@ -79,7 +79,7 @@ class OverlaysPage extends React.Component {
 }
 
 OverlaysPage.contextTypes = {
-  router: PropTypes.object.isRequired
+  router: PropTypes.object.isRequired,
 };
 
 export default OverlaysPage;

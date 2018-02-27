@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
-import isArray from 'lodash/isArray';
+import {isArray} from 'lodash';
 
 import {set} from 'app/stores/dynamicallyLoadingComponents//dynamicallyLoadingComponents.actions';
 

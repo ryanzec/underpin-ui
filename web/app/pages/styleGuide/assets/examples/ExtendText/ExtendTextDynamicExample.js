@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import axios from 'axios';
-import debounce from 'lodash/debounce';
+import {debounce} from 'lodash';
 import * as arrayUtils from 'src/utils/array';
 import {API_URL} from 'app/constants/api';
 
@@ -22,13 +22,13 @@ class ExtendTextDynamicExample extends React.Component {
     super(props);
 
     this.state = {
-      value: null
+      value: null,
     };
   }
 
-  onChange = newValue => {
+  onChange = (newValue) => {
     this.setState({
-      value: newValue
+      value: newValue,
     });
   };
 
@@ -37,18 +37,16 @@ class ExtendTextDynamicExample extends React.Component {
   }
 
   render() {
-    return (
-      <ExtendText
-        asyncOptions={this.asyncCallbackFunction}
-        value={this.state.value}
-        onChange={this.onChange}
-      />
-    );
+    return (<ExtendText
+      asyncOptions={this.asyncCallbackFunction}
+      onChange={this.onChange}
+      value={this.state.value}
+            />);
   }
 }
 
 ExtendTextDynamicExample.contextTypes = {
-  router: PropTypes.object.isRequired
+  router: PropTypes.object.isRequired,
 };
 
 export default ExtendTextDynamicExample;

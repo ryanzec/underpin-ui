@@ -1,5 +1,4 @@
-import forEach from 'lodash/forEach';
-import cloneDeep from 'lodash/cloneDeep';
+import {cloneDeep, forEach} from 'lodash';
 
 export function getIndexByPropertyValue(objectsArray, property, value) {
   let matchedKey;

@@ -2,7 +2,7 @@ import Accordion from 'src/components/Accordion/Accordion';
 import AccordionItem from 'src/components/Accordion/AccordionItem';
 import AccordionItemContent from 'src/components/Accordion/AccordionItemContent';
 import AccordionItemHeader from 'src/components/Accordion/AccordionItemHeader';
-import Badge from 'src/components/Badge/Badge.ts';
+import Badge from 'src/components/Badge/Badge';
 import Breadcrumb from 'src/components/Breadcrumb/Breadcrumb';
 import Breadcrumbs from 'src/components/Breadcrumb/Breadcrumbs';
 import Crumb from 'src/components/Breadcrumb/Crumb';

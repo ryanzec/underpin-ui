@@ -1,5 +1,5 @@
 import sass from 'node-sass';
-import isArray from 'lodash/isArray';
+import {isArray} from 'lodash';
 
 export const cleanCss = (css) => {
   const cssString = isArray(css) ? css.join(' ') : css;

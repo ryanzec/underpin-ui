@@ -3,8 +3,7 @@ import React, {PureComponent, createElement} from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import DomEventManager from 'src/utils/DomEventManager';
-import cloneDeep from 'lodash/cloneDeep';
-import isArray from 'lodash/isArray';
+import {isArray, cloneDeep} from 'lodash';
 
 import * as structureCss from 'src/styles/structure';
 import * as themesCss from 'src/styles/themes';

@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import * as PropTypes from 'prop-types';
+import * as React from 'react';
 
 import Code from 'src/components/Code/Code';
 import Card from 'src/components/Card/Card';

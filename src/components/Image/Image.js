@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
-import isString from 'lodash/isString';
+import {isString} from 'lodash';
 
 export const getInitialState = () => {
   return {

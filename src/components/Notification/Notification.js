@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import capitalize from 'lodash/capitalize';
+import {capitalize} from 'lodash';
 import * as polished from 'polished';
 
 import * as themesCss from 'src/styles/themes';

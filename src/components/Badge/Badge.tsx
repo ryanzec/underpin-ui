@@ -1,10 +1,11 @@
-import PropTypes from 'prop-types';
-import capitalize from 'lodash/capitalize';
+import {capitalize} from 'lodash';
+import * as PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import * as badgeCss from 'src/components/Badge/internal/badgeCss';
 import * as buttonCss from 'src/components/Button/internal/buttonCss';
 import * as cssUtils from 'src/utils/css';
+import * as React from 'react';
 
 export const baseStyles = () => {
   return `
@@ -19,7 +20,7 @@ export const baseStyles = () => {
   `;
 };
 
-export const pillStyles = (props) => {
+export const pillStyles = (props: IBadgeProps) => {
   if (!props.isPill) {
     return '';
   }
@@ -29,11 +30,7 @@ export const pillStyles = (props) => {
   `;
 };
 
-export const styleTypeStyles = (props) => {
-  if (!props.styleType) {
-    return '';
-  }
-
+export const styleTypeStyles = (props: IBadgeProps) => {
   const backgroundColor = props.styleType
     ? badgeCss.variables[`backgroundColor${capitalize(props.styleType)}`]
     : badgeCss.variables.backgroundColor;
@@ -43,17 +40,24 @@ export const styleTypeStyles = (props) => {
     : cssUtils.fillColors(badgeCss.variables.color, backgroundColor);
 };
 
-export const Badge = styled.div`
+export interface IBadgeProps {
+  className?: string;
+  styleType?: 'safe' | 'info' | 'warning' | 'danger';
+  isPill: boolean;
+  isThin: boolean;
+}
+
+export class BadgeComponent extends React.Component<IBadgeProps, {}> {
+  render() {
+    return <div className={this.props.className}>{this.props.children}</div>;
+  }
+}
+
+export const Badge = styled(BadgeComponent)`
   ${baseStyles}
   ${pillStyles}
   ${styleTypeStyles}
 `;
-
-Badge.propsTypes = {
-  styleType: PropTypes.oneOf(['safe', 'info', 'warning', 'danger']),
-  isPill: PropTypes.bool,
-  isThin: PropTypes.bool,
-};
 
 Badge.defaultProps = {
   styleType: null,

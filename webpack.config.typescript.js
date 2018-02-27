@@ -26,7 +26,7 @@ const isDevMode = process.env.NODE_ENV === 'development';
 
 let webpackConfig = {
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.tsx', '.js'],
     // modules: [__dirname, 'node_modules']
     alias: {
       src: path.resolve(__dirname, 'src'),
@@ -36,7 +36,7 @@ let webpackConfig = {
   module: {
     rules: [
       {
-        test: /\.ts$/,
+        test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: [path.resolve(__dirname, 'node_modules')],
       },

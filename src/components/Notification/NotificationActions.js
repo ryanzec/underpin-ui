@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
 import styled from 'styled-components';
-import capitalize from 'lodash/capitalize';
+import {capitalize} from 'lodash';
 
 import * as themesCss from 'src/styles/themes';
 import * as notificationCss from 'src/components/Notification/internal/notificationCss';

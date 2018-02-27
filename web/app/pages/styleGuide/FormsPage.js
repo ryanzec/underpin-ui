@@ -5,7 +5,7 @@ import FormElement from 'src/components/Form/FormElement';
 import FormSelect from 'src/components/Form/FormSelect';
 import FormSelectOption from 'src/components/Form/FormSelectOption';
 import FormTextbox from 'src/components/Form/FormTextbox';
-import FormLabel from 'src/components/Form/FormLabel';
+import FormLabel from 'src/components/Form/FormLabel.tsx';
 import FormTextboxGroup from 'src/components/Form/FormTextboxGroup';
 import FormValidationMessages from 'src/components/Form/FormValidationMessages';
 import FormValidationMessage from 'src/components/Form/FormValidationMessage';
