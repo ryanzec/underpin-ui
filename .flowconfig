@@ -1,0 +1,13 @@
++[ignore]
++
++[include]
++
++[libs]
++
++[lints]
++
++[options]
++module.name_mapper='^app' ->'<PROJECT_ROOT>/web/app/'
++module.name_mapper='^src' ->'<PROJECT_ROOT>/src/'
++
++[strict]

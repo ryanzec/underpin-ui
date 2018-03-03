@@ -2,15 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import moment from 'moment-timezone';
 
-// import CodeExample from '../../react/components/code-example';
-
-// import StylesExample from './src/examples/Buttons/styles';
-
-// import { readFileSync } from 'fs';
-// import { join } from 'path';
-
-// const stylesExampleContent = readFileSync(join(__dirname, '/src/examples/Buttons/styles'), 'utf8');
-
 import DatePicker from 'src/components/DatePicker/DatePicker';
 
 class DatePickerPage extends React.Component {
