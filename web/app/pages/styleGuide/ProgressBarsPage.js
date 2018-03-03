@@ -5,13 +5,6 @@ import CodeExample from '../../react/components/CodeExample';
 
 import ProgressBar from 'src/components/ProgressBar/ProgressBar';
 
-// import StylesExample from './src/examples/Buttons/styles';
-
-// import { readFileSync } from 'fs';
-// import { join } from 'path';
-
-// const stylesExampleContent = readFileSync(join(__dirname, '/src/examples/Buttons/styles'), 'utf8');
-
 class ProgressBarsPage extends React.Component {
   constructor(props) {
     super(props);

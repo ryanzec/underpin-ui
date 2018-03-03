@@ -6,13 +6,6 @@ import Card from 'src/components/Card/Card';
 import CardHeader from 'src/components/Card/CardHeader';
 import CardContent from 'src/components/Card/CardContent';
 
-// import StylesExample from './src/examples/Buttons/styles';
-
-// import { readFileSync } from 'fs';
-// import { join } from 'path';
-
-// const stylesExampleContent = readFileSync(join(__dirname, '/src/examples/Buttons/styles'), 'utf8');
-
 class ButtonsPage extends React.Component {
   constructor(props) {
     super(props);

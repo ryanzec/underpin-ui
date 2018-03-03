@@ -5,11 +5,6 @@ import CodeExample from '../../react/components/CodeExample';
 
 import InteractiveExample from './assets/examples/Tabs/TabsInteractiveExample';
 
-import { readFileSync } from 'fs';
-import { join } from 'path';
-
-const interactiveExampleContent = readFileSync(join(__dirname, '/assets/examples/Tabs/TabsInteractiveExample.js'), 'utf8');
-
 import Tab from 'src/components/Tabs/Tabs';
 import TabItem from 'src/components/Tabs/Tab';
 
@@ -26,7 +21,7 @@ class TabsPage extends React.Component {
         <h1>Tabs</h1>
         <CodeExample
           exampleComponent={InteractiveExample}
-          codeContent={interactiveExampleContent}
+          codeContent=""
         />
       </div>
     );

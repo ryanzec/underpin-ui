@@ -9,14 +9,6 @@ import Button from 'src/components/Button/Button';
 
 import InteractiveExample from './assets/examples/Buttons/ButtonsInteractiveExample';
 
-import {readFileSync} from 'fs';
-import {join} from 'path';
-
-const interactiveExampleContent = readFileSync(
-  join(__dirname, '/assets/examples/Buttons/ButtonsInteractiveExample.js'),
-  'utf8'
-);
-
 class ButtonsPage extends React.Component {
   constructor(props) {
     super(props);
@@ -64,7 +56,7 @@ class ButtonsPage extends React.Component {
           works.
         </p>
         <CodeExample
-          codeContent={interactiveExampleContent}
+          codeContent=""
           exampleComponent={InteractiveExample}
         />
         <div>

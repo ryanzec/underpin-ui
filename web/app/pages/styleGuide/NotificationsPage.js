@@ -2,13 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 
-// import CodeExample from '../../react/components/code-example';
-
-// import { readFileSync } from 'fs';
-// import { join } from 'path';
-
-// const stylesExampleContent = readFileSync(join(__dirname, '/src/examples/Buttons/styles'), 'utf8');
-
 import Code from 'src/components/Code/Code';
 import Button from 'src/components/Button/Button';
 

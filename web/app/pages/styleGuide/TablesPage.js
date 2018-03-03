@@ -1,15 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-// import CodeExample from '../../react/components/code-example';
-
-// import StylesExample from './assets/examples/Buttons/styles';
-
-// import { readFileSync } from 'fs';
-// import { join } from 'path';
-
-// const stylesExampleContent = readFileSync(join(__dirname, '/assets/examples/Buttons/styles'), 'utf8');
-
 import Table from 'src/components/Table/Table';
 import TableRow from 'src/components/Table/TableRow';
 import TableHeader from 'src/components/Table/TableHeader';

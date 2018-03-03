@@ -3,13 +3,6 @@ import React from 'react';
 
 import CodeExample from '../../react/components/CodeExample';
 
-// import StylesExample from './src/examples/Buttons/styles';
-
-// import { readFileSync } from 'fs';
-// import { join } from 'path';
-
-// const stylesExampleContent = readFileSync(join(__dirname, '/src/examples/Buttons/styles'), 'utf8');
-
 class CardsPage extends React.Component {
   constructor(props) {
     super(props);
