@@ -1,5 +1,5 @@
 import * as PropTypes from 'prop-types';
-import * as React from 'react';
+import React from 'react';
 
 class MainNavigation extends React.Component {
   constructor(props) {
@@ -17,20 +17,16 @@ class MainNavigation extends React.Component {
   }
 
   render() {
-    return (
-      <div className={this.getCssClasses().join(' ')}>
-        {this.props.children}
-      </div>
-    );
+    return <div className={this.getCssClasses().join(' ')}>{this.props.children}</div>;
   }
 }
 
 MainNavigation.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 MainNavigation.defaultProps = {
-  className: null
+  className: null,
 };
 
-export default MainNavigation
+export default MainNavigation;

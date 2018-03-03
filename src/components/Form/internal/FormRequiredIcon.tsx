@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import * as React from 'react';
 import * as themesCss from 'src/styles/themes';
 import * as formCss from 'src/components/Form/internal/formCss';
 
 import SvgIcon from 'src/components/SvgIcon/SvgIcon';
 
 export interface FormRequiredIconPropTypes {
-  icon: string,
+  icon: string;
+  poop?: string;
 }
 
 export const FormRequiredIconStyled = styled(SvgIcon)`
@@ -19,10 +21,10 @@ export const FormRequiredIconStyled = styled(SvgIcon)`
   top: -5px;
 `;
 
-export const FormRequiredIcon = (props: )
-
-FormRequiredIcon.propTypes = {
-  icon: PropTypes.string.isRequired,
-};
+export class FormRequiredIcon extends React.PureComponent<FormRequiredIconPropTypes, {}> {
+  render() {
+    return <FormRequiredIconStyled {...this.props} />;
+  }
+}
 
 export default FormRequiredIcon;
