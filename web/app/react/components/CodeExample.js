@@ -1,79 +1,103 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {PureComponent} from 'react';
+import ReactDOM from 'react-dom';
+import * as AllComponents from 'src';
+// import reactElementToJsxString from 'react-element-to-jsx-string';
+import styled, {css, keyframes, injectGlobal} from 'styled-components';
+import Playground from 'component-playground';
 
-import Code from 'src/components/Code/Code';
-import Card from 'src/components/Card/Card';
-import CardContent from 'src/components/Card/CardContent';
-import Button from 'src/components/Button/Button';
-
-class CodeExample extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      displayCodeExample: false
-    };
+injectGlobal`
+  .react-codemirror2,
+  .CodeMirror {
+    height: 100%;
   }
 
-  getCssClasses() {
-    let cssClasses = ['code-example'];
+  /* @todo: would like to do bug cause code editor to break out of parent for*/
+  /* @todo: reason unknown to me right now */
+  /*.CodeMirror {
+    padding: 5px;
+  }*/
+`;
 
-    if (this.props.className) {
-      cssClasses = cssClasses.concat(this.props.className.split(' '));
+const containerStyles = (props) => {
+  return css`
+    width: 100%;
+  `;
+};
+
+const ContainerStyled = styled(AllComponents.Card)`
+  ${containerStyles};
+`;
+
+const cardContentStyles = (props) => {
+  let codeBorderRadiusStyles
+    = props.axis === 'vertical' ? 'border-top-right-radius: 4px;' : 'border-bottom-left-radius: 4px;';
+
+  return css`
+    display: flex;
+    padding: 0;
+
+    .playground {
+      display: flex;
+      flex-direction: ${props.axis === 'vertical' ? 'row' : 'column'};
+      width: 100%;
     }
 
-    return cssClasses;
-  }
+    .playgroundCode {
+      flex: 1;
+      order: 2;
+    }
 
-  onClickToggleCodeExample = () => {
-    this.setState({
-      displayCodeExample: !this.state.displayCodeExample
-    })
+    .playgroundPreview {
+      flex: 1;
+      padding: 10px;
+    }
+
+    .CodeMirror {
+      ${codeBorderRadiusStyles} border-bottom-right-radius: 4px;
+    }
+  `;
+};
+
+const CardContentStyled = styled(AllComponents.CardContent)`
+  ${cardContentStyles};
+`;
+
+const jsxToStringOptions = {
+  showDefaultProps: false,
+};
+
+export class CodeExample extends React.PureComponent {
+  static propTypes = {
+    example: PropTypes.string.isRequired,
+    axis: PropTypes.oneOf(['horizontal', 'vertical']),
+  };
+
+  static defaultProps = {
+    example: null,
+    axis: 'vertical',
+  };
+
+  state = {
+    code: this.props.example.replace('/* eslint-disable */\n', ''),
   };
 
   render() {
-    const ExampleComponent = this.props.exampleComponent;
-    let codeExampleNode = null;
-
-    if (this.state.displayCodeExample) {
-      codeExampleNode = (
-        <Code language={this.props.language}>
-          {this.props.codeContent}
-        </Code>
-      )
-    }
+    const {example, axis, ...restOfProps} = this.props;
 
     return (
-      <Card className={this.getCssClasses().join(' ')}>
-        <CardContent>
-          <div>
-            <ExampleComponent />
-          </div>
-          <Button
-            styleType="link"
-            onClick={this.onClickToggleCodeExample}
-          >
-            Toggle Code Example
-          </Button>
-          {codeExampleNode}
-        </CardContent>
-      </Card>
+      <ContainerStyled {...restOfProps}>
+        <CardContentStyled axis={this.props.axis}>
+          <Playground
+            className="test"
+            codeText={this.state.code}
+            noRender={false}
+            scope={{PropTypes, React, PureComponent, ReactDOM, styled, css, keyframes, ...AllComponents}}
+          />
+        </CardContentStyled>
+      </ContainerStyled>
     );
   }
 }
-
-CodeExample.propTypes = {
-  className: PropTypes.string,
-  exampleComponent: PropTypes.func.isRequired,
-  codeContent: PropTypes.string.isRequired,
-  language: PropTypes.string
-};
-
-CodeExample.defaultProps = {
-  className: null,
-  exampleComponent: null,
-  codeContent: null,
-  language: 'jsx'
-};
 
 export default CodeExample;

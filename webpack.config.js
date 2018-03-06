@@ -37,7 +37,7 @@ let webpackConfig = {
     rules: [
       {
         test: /\.js$/,
-        exclude: [path.resolve(__dirname, 'node_modules')],
+        exclude: [path.resolve(__dirname, 'node_modules'), /(.*).example\.js$/],
         use: {
           loader: 'babel-loader',
           /*query: {

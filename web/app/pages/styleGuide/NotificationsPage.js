@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 
-import Code from 'src/components/Code/Code';
 import Button from 'src/components/Button/Button';
 
 import SvgIcon from 'src/components/SvgIcon/SvgIcon';

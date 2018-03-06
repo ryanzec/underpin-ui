@@ -31,11 +31,6 @@ export const INITIAL_STATE = {
           to: '/style-guide/cards',
         },
         {
-          id: 'style-guide-code',
-          display: 'Code',
-          to: '/style-guide/code',
-        },
-        {
           id: 'style-guide-colors',
           display: 'Colors',
           to: '/style-guide/colors',

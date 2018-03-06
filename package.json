@@ -31,6 +31,7 @@
     "polished": "1.9.2",
     "popper.js": "1.12.9",
     "prop-types": "15.6.0",
+    "raw-loader": "0.5.1",
     "react": "16.2.0",
     "react-dom": "16.2.0",
     "react-dropzone": "4.2.8",
@@ -68,6 +69,7 @@
     "browser-env": "3.2.4",
     "chai": "4.1.2",
     "circular-dependency-plugin": "4.4.0",
+    "component-playground": "3.1.1",
     "css-loader": "0.28.9",
     "css-modules-require-hook": "4.2.3",
     "enzyme": "3.3.0",
@@ -87,6 +89,7 @@
     "mock-webstorage": "1.0.3",
     "node-sass": "4.7.2",
     "node-sass-package-importer": "5.1.0",
+    "normalize.css": "8.0.0",
     "postcss-loader": "2.1.0",
     "precss": "3.1.0",
     "prettier-eslint-cli": "4.7.1",
@@ -113,6 +116,9 @@
   "license": "MIT",
   "main": "index",
   "name": "underpin-ui",
+  "peerDependencies": {
+    "normalize.css": "^8.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/ryanzec/underpin-ui.git"

@@ -13,12 +13,12 @@ export const font = {
 };
 
 export const spacing = {
-  extraTiny: '4px',
-  tiny: '8px',
-  extraSmall: '12px',
-  small: '16px',
-  medium: '20px',
-  large: '24px',
+  extraTiny: '5px',
+  tiny: '10px',
+  extraSmall: '15px',
+  small: '20px',
+  medium: '25px',
+  large: '30px',
 };
 
 export const borderRadius = {

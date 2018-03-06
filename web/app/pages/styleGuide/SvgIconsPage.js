@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import CodeExample from 'app/react/components/CodeExample';
+import svgIconBasicExample from 'raw-loader!app/pages/styleGuide/assets/examples/SvgIcons/SvgIconBasic.example';
+import svgIconStyleTypesExample from 'raw-loader!app/pages/styleGuide/assets/examples/SvgIcons/SvgIconStyleTypes.example';
+import svgIconIndicatorExample from 'raw-loader!app/pages/styleGuide/assets/examples/SvgIcons/SvgIconIndicator.example';
 
-import DefaultExample from './assets/examples/SvgIcons/SvgIconsDefaultExample';
-import StylesExample from './assets/examples/SvgIcons/SvgIconsStylesExample';
-import IndicatorsExample from './assets/examples/SvgIcons/SvgIconsIndicatorsExample';
+import CodeExample from 'app/react/components/CodeExample';
 
 class SvgIconsPage extends React.Component {
   constructor(props) {
@@ -18,20 +18,11 @@ class SvgIconsPage extends React.Component {
       <div className="p-style-guide-svg-icons">
         <h1>SVG Icons</h1>
         <h4>Default</h4>
-        <CodeExample
-          codeContent=""
-          exampleComponent={DefaultExample}
-        />
+        <CodeExample example={svgIconBasicExample} />
         <h4>Styles</h4>
-        <CodeExample
-          codeContent=""
-          exampleComponent={StylesExample}
-        />
+        <CodeExample example={svgIconStyleTypesExample} />
         <h4>Indicators</h4>
-        <CodeExample
-          codeContent=""
-          exampleComponent={IndicatorsExample}
-        />
+        <CodeExample example={svgIconIndicatorExample} />
       </div>
     );
   }

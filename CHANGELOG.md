@@ -8,6 +8,11 @@ There are some key used within the changelog which are as following:
 
 # IN PROGRESS
 
+* added component-playground for use as component live examples
+* added normalize.css through yarn
+* refactored styles of tab components
+* refactored style of style guide header
+* added flow setup (nto using yet)
 * made each section of the example application responsible for its own routes #4
 * did simple conversion to react-router 4.x (routes still defined centrally) #4
 * added context menu example using the popover components #11

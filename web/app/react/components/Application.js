@@ -2,13 +2,16 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
+
+import * as themesCss from 'src/styles/themes';
+import * as structureCss from 'src/styles/structure';
 
 import StyleGuideRouter from 'app/pages/styleGuide/StyleGuideRouter';
 import SubSystemRouter from 'app/pages/subSystems/SubSystemRouter';
 import ShowcaseRouter from 'app/pages/showcase/ShowcaseRouter';
 
-import CodePage from 'app/pages/styleGuide/CodePage';
+import TabsPage from 'app/pages/styleGuide/TabsPage';
 import NotFoundPage from 'app/react/components/NotFoundPage';
 
 import {toggleChrome} from 'app/stores/application/applicationActions';
@@ -20,16 +23,32 @@ import Tab from 'src/components/Tabs/Tab';
 import MainNavigation from './MainNavigation';
 import MainNavigationSection from './MainNavigationSection';
 
+const themeColors = themesCss.light;
+
 export const ChromeToggleContainerStyled = styled.div`
   position: fixed;
-  bottom: 10px;
-  right: 10px;
+  bottom: ${structureCss.spacing.tiny};
+  right: ${structureCss.spacing.tiny};
   opacity: 0.1;
   transition: opacity 0.15s linear;
 
   &:hover {
     opacity: 1;
   }
+`;
+
+export const HeaderStyled = styled.div`
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid ${themeColors.application.border};
+  background-color: ${themesCss.light.global.gray1};
+`;
+
+export const HeaderLogoStyled = styled.div`
+  padding: 0 ${structureCss.spacing.extraSmall};
+  align-self: stretch;
+  display: flex;
+  align-items: center;
 `;
 
 export const mapStateToProps = function({menu, application}) {
@@ -62,8 +81,8 @@ class Application extends React.Component {
     return (
       /* eslint-workaround */
       <Redirect
-        component={CodePage}
-        to="/style-guide/code"
+        component={TabsPage}
+        to="/style-guide/tabs"
       />
     );
   };
@@ -102,25 +121,23 @@ class Application extends React.Component {
     }
 
     return (
-      <div className="application-container__header">
-        <div className="application-container__header-logo">Underpin UI</div>
-        <div>
-          <Tabs isBlock>
-            <Tab
-              isActive
-              isBlock
-            >
-              Documentation
-            </Tab>
-            <Tab
-              isBlock
-              onClick={this.onClickGitHub}
-            >
-              GitHub
-            </Tab>
-          </Tabs>
-        </div>
-      </div>
+      <HeaderStyled>
+        <HeaderLogoStyled>Underpin UI</HeaderLogoStyled>
+        <Tabs isBlock>
+          <Tab
+            isActive
+            isBlock
+          >
+            Documentation
+          </Tab>
+          <Tab
+            isBlock
+            onClick={this.onClickGitHub}
+          >
+            GitHub
+          </Tab>
+        </Tabs>
+      </HeaderStyled>
     );
   }
 
