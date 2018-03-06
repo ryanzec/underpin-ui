@@ -8,6 +8,9 @@ There are some key used within the changelog which are as following:
 
 # IN PROGRESS
 
+* added ability to set offset for popover container
+* added some flip configuration to popover container
+* added ability to get true position from popover container
 * added component-playground for use as component live examples
 * added normalize.css through yarn
 * refactored styles of tab components

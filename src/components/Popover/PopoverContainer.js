@@ -3,6 +3,7 @@ import React, {PureComponent} from 'react';
 import ReactDOM from 'react-dom';
 import PopperJS from 'popper.js';
 import DomEventManager from 'src/utils/DomEventManager';
+import * as unchanged from 'unchanged';
 
 export const createComponentDidMount = (instance) => {
   return () => {
@@ -17,6 +18,26 @@ export const createComponentDidMount = (instance) => {
 export const createComponentWillMount = (instance) => {
   return () => {
     instance.domEventManager.clear();
+  };
+};
+
+export const createComponentWillReceiveProps = (instance) => {
+  return () => {
+    // this will make sure if any styles changes have happen, the poppers
+    // position will be updated accordingly
+    instance.updatePopper();
+  };
+};
+
+export const createComponentWillUpdate = () => {
+  return (nextProps, nextState) => {
+    const {data} = nextState;
+    const {isActive, onPlacemenetUpdate} = nextProps;
+
+    if (isActive && onPlacemenetUpdate) {
+      // make sure element know the real placement incase flipping happened
+      onPlacemenetUpdate(data.placement);
+    }
   };
 };
 
@@ -43,7 +64,10 @@ export const createOnClickOutside = (instance) => {
 
 export const createGetPopperStyles = (instance) => {
   return () => {
-    if (!instance.props.isActive || !instance.popper || !instance.state.data) {
+    const {data} = instance.state;
+    const {offset, isActive} = instance.props;
+
+    if (!isActive || !instance.popper || !data) {
       return {
         position: 'absolute',
         pointerEvents: 'none',
@@ -53,7 +77,20 @@ export const createGetPopperStyles = (instance) => {
       };
     }
 
-    return instance.state.data.styles;
+    let x = parseInt(data.popper.left, 10);
+    let y = parseInt(data.popper.top, 10);
+
+    if (~data.placement.indexOf('top')) {
+      y -= offset;
+    } else if (~data.placement.indexOf('bottom')) {
+      y += offset;
+    } else if (~data.placement.indexOf('left')) {
+      x -= offset;
+    } else {
+      x += offset;
+    }
+
+    return unchanged.set('transform', `translate3d(${x}px, ${y}px, 0)`, data.styles);
   };
 };
 
@@ -89,7 +126,7 @@ export const createUpdatePopper = (instance) => {
 
 export const createCreatePopper = (instance) => {
   return () => {
-    const {placement} = instance.props;
+    const {placement, flipBoundaries} = instance.props;
     const modifiers = {
       applyStyle: {
         enabled: false,
@@ -98,6 +135,12 @@ export const createCreatePopper = (instance) => {
         enabled: true,
         order: 900,
         fn: instance.onUpdatePopperPosition,
+      },
+      preventOverflow: {
+        escapeWithReference: true,
+      },
+      flip: {
+        boundariesElement: flipBoundaries,
       },
       ...instance.props.modifiers,
     };
@@ -108,6 +151,7 @@ export const createCreatePopper = (instance) => {
       {
         placement,
         modifiers,
+        onUpdate: instance.onUpdatePopperPosition,
       }
     );
 
@@ -141,6 +185,9 @@ class PopoverContainer extends PureComponent {
     onClickOutside: PropTypes.func,
     modifiers: PropTypes.object,
     placement: PropTypes.string,
+    flipBoundaries: PropTypes.oneOf(['scrollParent', 'viewport']),
+    offset: PropTypes.number,
+    onPlacemenetUpdate: PropTypes.func,
   };
 
   static defaultProps = {
@@ -148,6 +195,9 @@ class PopoverContainer extends PureComponent {
     onClickOutside: null,
     modifiers: {},
     placement: 'auto',
+    flipBoundaries: 'scrollParent',
+    offset: 0,
+    onPlacemenetUpdate: null,
   };
 
   state = {
@@ -155,6 +205,8 @@ class PopoverContainer extends PureComponent {
   };
 
   componentDidMount = createComponentDidMount(this);
+  componentWillReceiveProps = createComponentWillReceiveProps(this);
+  componentWillUpdate = createComponentWillUpdate(true);
   componentWillUnmount = createComponentWillMount(this);
 
   domEventManager = new DomEventManager();
@@ -173,7 +225,17 @@ class PopoverContainer extends PureComponent {
   setContentElement = createSetContentElement(this);
 
   render() {
-    const {children, isActive, onClickOutside, modifiers, placement, ...restOfProps} = this.props;
+    const {
+      children,
+      isActive,
+      onClickOutside,
+      modifiers,
+      placement,
+      flipBoundaries,
+      offset,
+      onPlacemenetUpdate,
+      ...restOfProps
+    } = this.props;
 
     // NOTE: we need to add in a ref in order to make sure in the outside click handler we are not clicking on the
     // NOTE: content
