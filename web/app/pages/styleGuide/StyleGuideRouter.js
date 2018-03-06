@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {Route} from 'react-router';
 
 import OverlaysPage from './OverlaysPage';
-import CodePage from './CodePage';
 import SvgIconsPage from './SvgIconsPage';
 import ButtonsPage from './ButtonsPage';
 import ColorsPage from './ColorsPage';
@@ -123,10 +122,6 @@ export class StyleGuideRouter extends PureComponent {
         <Route
           component={AccordionPage}
           path={`${match.url}/accordion`}
-        />
-        <Route
-          component={CodePage}
-          path={`${match.url}/code`}
         />
       </div>
     );

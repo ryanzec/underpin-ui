@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import CodeExample from '../../react/components/CodeExample';
 import Card from 'src/components/Card/Card';
 import CardHeader from 'src/components/Card/CardHeader';
 import CardContent from 'src/components/Card/CardContent';
@@ -16,7 +15,10 @@ class ButtonsPage extends React.Component {
     return (
       <div className="p-style-guide-colors">
         <h1>Color</h1>
-        <p>These are the different color palettes that are available (currently using the colors from VMWare's Clarity Project https://vmware.github.io/clarity/documentation/color).</p>
+        <p>
+          These are the different color palettes that are available (currently using the colors from VMWare's Clarity
+          Project https://vmware.github.io/clarity/documentation/color).
+        </p>
         <Card className="color-palette">
           <CardHeader>Gray Color Palette</CardHeader>
           <CardContent className="u-padding-0">
@@ -160,7 +162,7 @@ class ButtonsPage extends React.Component {
 }
 
 ButtonsPage.contextTypes = {
-  router: PropTypes.object.isRequired
+  router: PropTypes.object.isRequired,
 };
 
 export default ButtonsPage;
