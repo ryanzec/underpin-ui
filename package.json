@@ -86,6 +86,7 @@
     "html-webpack-plugin": "2.30.1",
     "husky": "0.14.3",
     "json-server": "0.12.1",
+    "lint-staged": "7.0.0",
     "mock-webstorage": "1.0.3",
     "node-sass": "4.7.2",
     "node-sass-package-importer": "5.1.0",
@@ -114,6 +115,12 @@
     "components"
   ],
   "license": "MIT",
+  "lint-staged": {
+    "*.{js.json}": [
+      "./node_modules/.bin/prettier-eslint --write",
+      "git add"
+    ]
+  },
   "main": "index",
   "name": "underpin-ui",
   "peerDependencies": {
@@ -131,7 +138,7 @@
     "copy-static-assets": "echo \"Copying static assets...\" && mkdir -p ./web/build/images && cp -R ./web/app/images/ ./web/build/images",
     "lint": "echo \"Linting javascript code...\" && ./node_modules/.bin/eslint --config prod.eslintrc src/ test/",
     "lint:fix": "echo \"Auto formating javascript code...\" && ./node_modules/.bin/prettier-eslint --write \"src/**/*.js\" \"test/**/*.js\"",
-    "precommit": "yarn lint:fix && yarn lint",
+    "precommit": "lint-staged && yarn lint",
     "prepush": "yarn lint && yarn test",
     "prepublish": "rm -rf ./lib && mkdir -p ./lib/styles && ./node_modules/babel-cli/bin/babel.js src --out-dir lib && cp -r ./src/styles/ ./lib/styles",
     "test": "NODE_PATH=. NODE_ENV=test ./node_modules/.bin/ava --verbose",
