@@ -8,6 +8,7 @@ There are some key used within the changelog which are as following:
 
 # IN PROGRESS
 
+* added utility for checking children for specific count or range and throwing error if invalid
 * added ability to set offset for popover container
 * added some flip configuration to popover container
 * added ability to get true position from popover container
