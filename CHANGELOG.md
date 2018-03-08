@@ -2,12 +2,15 @@
 
 There are some key used within the changelog which are as following:
 
-**NOTE: anything before `beta1` can be breaking without explicitly staying it**
+**NOTE: anything before `beta1` can be breaking without explicitly stating it**
 
 * [BREAKING]: means there is a change that is known to break existing code
 
 # IN PROGRESS
 
+* fixed styling issue with main header
+* now using webpack-dev-server for local server
+* added lint-staged to precommit git hook
 * added utility for checking children for specific count or range and throwing error if invalid
 * added ability to set offset for popover container
 * added some flip configuration to popover container

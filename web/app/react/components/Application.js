@@ -6,6 +6,7 @@ import styled, {css} from 'styled-components';
 
 import * as themesCss from 'src/styles/themes';
 import * as structureCss from 'src/styles/structure';
+import * as cssUtils from 'src/utils/css';
 
 import StyleGuideRouter from 'app/pages/styleGuide/StyleGuideRouter';
 import SubSystemRouter from 'app/pages/subSystems/SubSystemRouter';
@@ -42,6 +43,7 @@ export const HeaderStyled = styled.div`
   align-items: center;
   border-bottom: 1px solid ${themeColors.application.border};
   background-color: ${themesCss.light.global.gray1};
+  ${cssUtils.flexboxSpecificValue('height', '47px')};
 `;
 
 export const HeaderLogoStyled = styled.div`
