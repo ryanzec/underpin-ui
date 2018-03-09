@@ -2109,7 +2109,7 @@ colors@0.5.x:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/colors/-/colors-0.5.1.tgz#7d0023eaeb154e8ee9fce75dcb923d0ed1667774"
 
-colors@~1.1.2:
+colors@1.1.2, colors@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/colors/-/colors-1.1.2.tgz#168a4701756b6a7f51a12ce0c97bfa28c084ed63"
 
@@ -3556,9 +3556,9 @@ fast-diff@^1.1.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.1.2.tgz#4b62c42b8e03de3f848460b639079920695d0154"
 
-fast-equals@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/fast-equals/-/fast-equals-1.1.0.tgz#10eb07e48dbbacb74214ef6856f2bbea69f3114f"
+fast-equals@1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/fast-equals/-/fast-equals-1.2.1.tgz#aa1926b828213df4b528bfd9e21b17ba1c7d34cb"
 
 fast-json-stable-stringify@^2.0.0:
   version "2.0.0"
@@ -8166,7 +8166,7 @@ require-relative@^0.8.7:
   version "0.8.7"
   resolved "https://registry.yarnpkg.com/require-relative/-/require-relative-0.8.7.tgz#7999539fc9e047a37928fa196f8e1563dabd36de"
 
-require-uncached@^1.0.3:
+require-uncached@1.0.3, require-uncached@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/require-uncached/-/require-uncached-1.0.3.tgz#4e0d56d6c9662fd31e43011c4b95aa49955421d3"
   dependencies:
