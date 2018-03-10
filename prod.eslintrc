@@ -13,13 +13,12 @@
     "document": true,
     "console": true,
     "confirm": true,
-    "_": true,
-    "UAParser": true,
     "process": true,
     "requestAnimationFrame": true,
     "global": true,
     "localStorage": true,
-    "sessionStorage": true
+    "sessionStorage": true,
+    "exports": true
   },
   "rules": {
     // NOTE: useful for see variables that can be removed

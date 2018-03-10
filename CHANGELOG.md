@@ -8,6 +8,7 @@ There are some key used within the changelog which are as following:
 
 # IN PROGRESS
 
+* added mocked server solution backed by json-server
 * fixed styling issue with main header
 * now using webpack-dev-server for local server
 * added lint-staged to precommit git hook

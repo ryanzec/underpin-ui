@@ -7,3 +7,5 @@ npm-debug.log
 /web/local-server
 /.idea/*
 *.log
+/mock-server/db.json
+/mock-server/apiCalls.rest
