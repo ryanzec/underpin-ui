@@ -39,7 +39,9 @@ export const autoCompleteContainerPositionStyles = (props) => {
 };
 
 export const autoCompleteContainerActiveStyles = (props) => {
-  const borderColor = props.isActive ? formCss.variables.borderColorFocusInput : themesCss.light.application.border;
+  const borderColor = props.isActive
+    ? formCss.variables.borderColorFocusInput
+    : themesCss.light.application.borderColor;
 
   return `
     border: 1px solid ${borderColor};

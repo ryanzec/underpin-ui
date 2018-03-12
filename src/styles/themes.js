@@ -30,13 +30,14 @@ export const light = {
     ...lightGlobalColors,
   },
   application: {
-    border: lightGlobalColors.gray4,
+    borderColor: lightGlobalColors.gray4,
     boxShadow: lightGlobalColors.darkTransparent1,
     textDarkColor: lightGlobalColors.gray6,
     textMutedColor: lightGlobalColors.gray5,
     textLightColor: lightGlobalColors.white,
     textLightMutedColor: lightGlobalColors.gray4,
     textLinkColor: lightGlobalColors.blue2,
+    activeState: lightGlobalColors.blue1,
   },
   state: {
     successLight: lightGlobalColors.green1,

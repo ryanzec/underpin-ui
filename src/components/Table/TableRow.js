@@ -9,7 +9,7 @@ export const zebraStyles = (props) => {
   }
 
   return `
-    border: 1px solid ${themesCss.light.application.border};
+    border: 1px solid ${themesCss.light.application.borderColor};
 
     &:nth-child(2n+0) {
       background-color: ${themesCss.light.global.blue1};
@@ -18,7 +18,7 @@ export const zebraStyles = (props) => {
 };
 
 export const TableRow = styled.tr`
-  border: ${props => (props.isBorderless ? '0' : `1px solid ${themesCss.light.application.border}`)};
+  border: ${props => (props.isBorderless ? '0' : `1px solid ${themesCss.light.application.borderColor}`)};
 
   ${zebraStyles};
 `;

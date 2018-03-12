@@ -14,7 +14,7 @@ export const ContainerStyled = styled.div`
   font-size: 3rem;
   font-weight: bold;
   padding: ${structureCss.spacing.extraSmall};
-  border-bottom: 1px solid ${themesCss.light.application.border};
+  border-bottom: 1px solid ${themesCss.light.application.borderColor};
 `;
 
 export const CloseIconStyled = styled(SvgIcon)`

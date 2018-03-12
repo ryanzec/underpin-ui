@@ -6,7 +6,7 @@ import {
   DropDownMenuDivider,
   DropDownMenuHeader,
   DropDownMenuItem,
-  Popover,
+  PopoverRenderer,
   PopoverContainer,
   PopoverContent,
   PopoverHandle,
@@ -76,18 +76,18 @@ class PopoversPage extends React.Component {
     });
   };
 
-  popoverPropRenderer({onShow, onHide}) {
-    const handle = (
-      <span
-        onMouseEnter={onShow}
-        onMouseLeave={onHide}
-      >
-        be
-      </span>
+  popoverPropRenderer({isActive, onShow, onHide}) {
+    return (
+      <PopoverContainer isActive={isActive}>
+        <span
+          onMouseEnter={onShow}
+          onMouseLeave={onHide}
+        >
+          be
+        </span>
+        <TooltipContent>content2</TooltipContent>
+      </PopoverContainer>
     );
-    const content = <TooltipContent>content2</TooltipContent>;
-
-    return [handle, content];
   }
 
   renderPopover() {
@@ -103,7 +103,7 @@ class PopoversPage extends React.Component {
   }
 
   renderPopover2() {
-    return <Popover render={this.popoverPropRenderer} />;
+    return <PopoverRenderer render={this.popoverPropRenderer} />;
   }
 
   renderPopoverDD() {

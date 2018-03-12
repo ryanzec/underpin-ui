@@ -11,7 +11,7 @@ export const ContainerStyled = styled.div`
   font-size: ${formCss.variables.fontSizeFormLegend};
   padding-bottom: ${formCss.variables.paddingFormLegend};
   margin-bottom: ${formCss.variables.marginFormLegend};
-  border-bottom: 1px solid ${themesCss.light.application.border};
+  border-bottom: 1px solid ${themesCss.light.application.borderColor};
   width: 100%;
   display: flex;
 `;

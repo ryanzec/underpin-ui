@@ -55,6 +55,7 @@ const cardContentStyles = (props) => {
 
     .CodeMirror {
       ${codeBorderRadiusStyles} border-bottom-right-radius: 4px;
+      line-height: 1.6;
     }
   `;
 };

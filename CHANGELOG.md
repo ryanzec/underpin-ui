@@ -8,6 +8,8 @@ There are some key used within the changelog which are as following:
 
 # IN PROGRESS
 
+* more tuning of the main chrome
+* refactored expandable list component
 * added mocked server solution backed by json-server
 * fixed styling issue with main header
 * now using webpack-dev-server for local server

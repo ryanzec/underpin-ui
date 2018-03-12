@@ -23,7 +23,7 @@ export const validationStyles = (props) => {
 
 export const FormTextboxGroupAddon = styled.div`
   display: inline-flex;
-  border: 1px solid ${themesCss.light.application.border};
+  border: 1px solid ${themesCss.light.application.borderColor};
   padding: ${formCss.variables.paddingInput};
   background-color: ${formCss.variables.backgroundColorTextboxGroupAddon};
 
