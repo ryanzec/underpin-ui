@@ -19,7 +19,7 @@ const applyStatusColors = (props) => {
 export const Card = styled.div`
   position: relative;
   display: inline-block;
-  border: ${cardCss.variables.borderWidth} solid ${themesCss.light.application.border};
+  border: ${cardCss.variables.borderWidth} solid ${themesCss.light.application.borderColor};
   background-color: ${cardCss.variables.backgroundColor};
   border-radius: ${cardCss.variables.borderRadius};
 

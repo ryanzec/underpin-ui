@@ -21,10 +21,21 @@ import FormCheckableInput from 'src/components/Form/FormCheckableInput';
 import Tabs from 'src/components/Tabs/Tabs';
 import Tab from 'src/components/Tabs/Tab';
 
-import MainNavigation from './MainNavigation';
 import MainNavigationSection from './MainNavigationSection';
 
 const themeColors = themesCss.light;
+
+export const mainNavigiationStyles = () => {
+  return css`
+    ${cssUtils.flexboxSpecificValue('width', '250px')}
+    border-right: 1px solid ${themeColors.application.borderColor}};
+    background: ${themeColors.global.gray1};
+  `;
+};
+
+export const MainNavigiationStyled = styled.div`
+  ${mainNavigiationStyles};
+`;
 
 export const ChromeToggleContainerStyled = styled.div`
   position: fixed;
@@ -41,7 +52,7 @@ export const ChromeToggleContainerStyled = styled.div`
 export const HeaderStyled = styled.div`
   display: flex;
   align-items: center;
-  border-bottom: 1px solid ${themeColors.application.border};
+  border-bottom: 1px solid ${themeColors.application.borderColor};
   background-color: ${themesCss.light.global.gray1};
   ${cssUtils.flexboxSpecificValue('height', '47px')};
 `;
@@ -166,7 +177,7 @@ class Application extends React.Component {
         );
       });
 
-      menuNode = <MainNavigation>{menuSectionNodes}</MainNavigation>;
+      menuNode = <MainNavigiationStyled>{menuSectionNodes}</MainNavigiationStyled>;
     }
 
     return menuNode;

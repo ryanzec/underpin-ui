@@ -13,19 +13,19 @@ export const font = {
 };
 
 export const spacing = {
-  extraTiny: '5px',
-  tiny: '10px',
-  extraSmall: '15px',
-  small: '20px',
-  medium: '25px',
-  large: '30px',
+  extraTiny: '.5rem',
+  tiny: '1rem',
+  extraSmall: '1.5rem',
+  small: '2rem',
+  medium: '2.5rem',
+  large: '3rem',
 };
 
 export const borderRadius = {
-  pill: '9999px',
-  tiny: '3px',
-  small: '5px',
-  medium: '10px',
+  pill: '999rem',
+  tiny: '.3rem',
+  small: '.5rem',
+  medium: '1rem',
 };
 
 export const mediaQueries = {

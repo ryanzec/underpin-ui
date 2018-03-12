@@ -8,7 +8,7 @@ export const ModalFooter = styled.div`
   ${cssUtils.flexboxSpecificValue('height', '60px')} display: flex;
   align-items: center;
   padding: ${structureCss.spacing.extraSmall};
-  border-top: 1px solid ${themesCss.light.application.border};
+  border-top: 1px solid ${themesCss.light.application.borderColor};
 `;
 
 export default ModalFooter;

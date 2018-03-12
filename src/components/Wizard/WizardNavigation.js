@@ -11,7 +11,7 @@ import SvgIcon from 'src/components/SvgIcon/SvgIcon';
 export const ContainerStyled = styled.div`
   ${props => cssUtils.flexboxSpecificValue('width', props.isCollapsed ? '48px' : '200px')}
 
-  border-right: 1px solid ${themesCss.light.application.border};
+  border-right: 1px solid ${themesCss.light.application.borderColor};
   overflow: hidden;
   display: flex;
   flex-direction: column;

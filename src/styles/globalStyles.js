@@ -9,7 +9,7 @@ injectGlobal`
     //box-sizing: content-box;
     height: 0;
     border: none;
-    border-bottom: 1px solid ${themesCss.light.application.border};
+    border-bottom: 1px solid ${themesCss.light.application.borderColor};
   }
 
   html {
@@ -28,7 +28,7 @@ injectGlobal`
   td,
   th {
     padding: 4px 8px;
-    border: 1px solid ${themesCss.light.application.border};
+    border: 1px solid ${themesCss.light.application.borderColor};
   }
 
   ol,

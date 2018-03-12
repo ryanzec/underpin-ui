@@ -4,7 +4,7 @@ import * as themesCss from 'src/styles/themes';
 
 export const DropDownMenu = styled.div`
   background-color: ${themesCss.light.global.white};
-  border: 1px solid ${themesCss.light.application.border};
+  border: 1px solid ${themesCss.light.application.borderColor};
   border-radius: 3px;
 `;
 

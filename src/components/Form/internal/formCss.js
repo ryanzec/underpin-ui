@@ -42,7 +42,7 @@ export const standardInputStyles = () => {
     width: 100%;
     border-radius: ${variables.inputBorderRadius};
     outline: none;
-    border: 1px solid ${theme.application.border};
+    border: 1px solid ${theme.application.borderColor};
     padding: ${variables.paddingInput} calc(${variables.paddingInput} * 2);
 
     &:focus {

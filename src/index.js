@@ -22,7 +22,8 @@ import DropDownMenu from 'src/components/DropDownMenu/DropDownMenu';
 import DropDownMenuDivider from 'src/components/DropDownMenu/DropDownMenuDivider';
 import DropDownMenuHeader from 'src/components/DropDownMenu/DropDownMenuHeader';
 import DropDownMenuItem from 'src/components/DropDownMenu/DropDownMenuItem';
-import ExpandableList from 'src/components/List/ExpandableList';
+import ExpandableListHeader from 'src/components/ExpandableList/ExpandableListHeader';
+import ExpandableListRenderer from 'src/components/ExpandableList/ExpandableListRenderer';
 import ExtendText from 'src/components/ExtendText/ExtendText';
 import ExtendTextAutoCompleteOption from 'src/components/ExtendText/ExtendTextAutoCompleteOption';
 import FileUploadDragDrop from 'src/components/FileUploadDragDrop/FileUploadDragDrop';
@@ -57,7 +58,7 @@ import NotificationCountdown from 'src/components/Notification/NotificationCount
 import NotificationIcon from 'src/components/Notification/NotificationIcon';
 import NotificationMessage from 'src/components/Notification/NotificationMessage';
 import Overlay from 'src/components/Overlay/Overlay';
-import Popover from 'src/components/Popover/Popover';
+import PopoverRenderer from 'src/components/Popover/PopoverRenderer';
 import PopoverContainer from 'src/components/Popover/PopoverContainer';
 import PopoverContent from 'src/components/Popover/PopoverContent';
 import PopoverHandle from 'src/components/Popover/PopoverHandle';
@@ -106,7 +107,8 @@ export {
   DropDownMenuDivider,
   DropDownMenuHeader,
   DropDownMenuItem,
-  ExpandableList,
+  ExpandableListHeader,
+  ExpandableListRenderer,
   ExtendText,
   ExtendTextAutoCompleteOption,
   FileUploadDragDrop,
@@ -141,7 +143,7 @@ export {
   NotificationIcon,
   NotificationMessage,
   Overlay,
-  Popover,
+  PopoverRenderer,
   PopoverContainer,
   PopoverContent,
   PopoverHandle,
