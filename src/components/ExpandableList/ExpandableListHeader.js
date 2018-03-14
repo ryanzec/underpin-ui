@@ -10,6 +10,7 @@ export const ExpandableListHeaderStyled = styled(ListItem)`
   cursor: pointer;
   display: flex;
   align-items: center;
+  padding-left: 0;
 `;
 
 class ExpandableListHeader extends PureComponent {

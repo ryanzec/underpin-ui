@@ -25,7 +25,7 @@ const startServer = () => {
 
   app.use(middlewares);
   app.use(customMiddleware);
-  app.use('/api/v1', customV1Routes);
+  app.use('/api/v1', customV1Routes(router.db));
   app.use('/api/v1', router);
   server = app.listen(PORT, () => {
     console.log('JSON Server is running'.green);

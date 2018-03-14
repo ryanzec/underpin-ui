@@ -7,7 +7,7 @@ export const login = (username, password) => {
     password,
   };
   const headers = {
-    'api-version': '1',
+    'x-api-version': '1',
     Accept: 'application/json',
   };
 
