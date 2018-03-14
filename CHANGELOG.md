@@ -8,6 +8,7 @@ There are some key used within the changelog which are as following:
 
 # IN PROGRESS
 
+* popover container offset now supports offseting both axes at the same time
 * now using portals for popover content
 * enhanced mock server custom route data retrieval pattern
 * fixed display bug for expandable lists

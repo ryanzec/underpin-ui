@@ -24,12 +24,21 @@ export class PopoverRenderer extends Component {
     });
   };
 
+  onToggle = () => {
+    this.setState((oldState) => {
+      return {
+        isActive: !oldState.isActive,
+      };
+    });
+  };
+
   render() {
     const {isActive} = this.state;
     const passDown = {
       isActive,
       onShow: this.onShow,
       onHide: this.onHide,
+      onToggle: this.onToggle,
     };
     const renderChildren = this.props.render(passDown);
 
