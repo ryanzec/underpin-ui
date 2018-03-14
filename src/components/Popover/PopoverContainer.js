@@ -77,18 +77,8 @@ export const createGetPopperStyles = (instance) => {
       };
     }
 
-    let x = parseInt(data.popper.left, 10);
-    let y = parseInt(data.popper.top, 10);
-
-    if (~data.placement.indexOf('top')) {
-      y -= offset;
-    } else if (~data.placement.indexOf('bottom')) {
-      y += offset;
-    } else if (~data.placement.indexOf('left')) {
-      x -= offset;
-    } else {
-      x += offset;
-    }
+    let x = parseInt(data.popper.left, 10) + (offset && offset.x ? offset.x : 0);
+    let y = parseInt(data.popper.top, 10) + (offset && offset.y ? offset.y : 0);
 
     return unchanged.set('transform', `translate3d(${x}px, ${y}px, 0)`, data.styles);
   };
@@ -186,7 +176,7 @@ class PopoverContainer extends PureComponent {
     modifiers: PropTypes.object,
     placement: PropTypes.string,
     flipBoundaries: PropTypes.oneOf(['scrollParent', 'viewport']),
-    offset: PropTypes.number,
+    offset: PropTypes.object,
     onPlacemenetUpdate: PropTypes.func,
   };
 
@@ -196,7 +186,10 @@ class PopoverContainer extends PureComponent {
     modifiers: {},
     placement: 'auto',
     flipBoundaries: 'scrollParent',
-    offset: 0,
+    offset: {
+      x: 0,
+      y: 0,
+    },
     onPlacemenetUpdate: null,
   };
 
