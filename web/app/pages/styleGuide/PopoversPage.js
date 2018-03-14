@@ -70,7 +70,7 @@ class PopoversPage extends React.Component {
     });
   };
 
-  onClickOutsideContentMenu = () => {
+  onClickOutsideContextMenu = () => {
     this.setState({
       isActiveContextMenu: false,
     });
@@ -85,7 +85,9 @@ class PopoversPage extends React.Component {
         >
           be
         </span>
-        <TooltipContent>content2</TooltipContent>
+        <PopoverContent>
+          <TooltipContent>content2</TooltipContent>
+        </PopoverContent>
       </PopoverContainer>
     );
   }
@@ -97,7 +99,7 @@ class PopoversPage extends React.Component {
         placement="top-start"
       >
         <PopoverHandle onClick={this.onClickPopover}>handle</PopoverHandle>
-        <PopoverContent>content</PopoverContent>
+        <PopoverContent isPlain={false}>content</PopoverContent>
       </PopoverContainer>
     );
   }
@@ -113,18 +115,20 @@ class PopoversPage extends React.Component {
         onClickOutside={this.onClickOutsideDD}
         placement="top-start"
       >
-        <PopoverHandle onClick={this.onClickPopoverContextMenu}>drop down</PopoverHandle>
-        <DropDownMenu>
-          <DropDownMenuHeader>Welcome John Doe</DropDownMenuHeader>
-          <DropDownMenuDivider />
-          <DropDownMenuItem>Your profile</DropDownMenuItem>
-          <DropDownMenuItem>Explore</DropDownMenuItem>
-          <DropDownMenuItem>Intergerations</DropDownMenuItem>
-          <DropDownMenuItem>Help</DropDownMenuItem>
-          <DropDownMenuDivider />
-          <DropDownMenuItem>Settings</DropDownMenuItem>
-          <DropDownMenuItem>Log out</DropDownMenuItem>
-        </DropDownMenu>
+        <PopoverHandle onClick={this.onClickPopoverDD}>drop down</PopoverHandle>
+        <PopoverContent>
+          <DropDownMenu>
+            <DropDownMenuHeader>Welcome John Doe</DropDownMenuHeader>
+            <DropDownMenuDivider />
+            <DropDownMenuItem>Your profile</DropDownMenuItem>
+            <DropDownMenuItem>Explore</DropDownMenuItem>
+            <DropDownMenuItem>Intergerations</DropDownMenuItem>
+            <DropDownMenuItem>Help</DropDownMenuItem>
+            <DropDownMenuDivider />
+            <DropDownMenuItem>Settings</DropDownMenuItem>
+            <DropDownMenuItem>Log out</DropDownMenuItem>
+          </DropDownMenu>
+        </PopoverContent>
       </PopoverContainer>
     );
   }
@@ -137,17 +141,19 @@ class PopoversPage extends React.Component {
         placement="top-start"
       >
         <PopoverHandle onContextMenu={this.onClickPopoverContextMenu}>drop down</PopoverHandle>
-        <DropDownMenu>
-          <DropDownMenuHeader>Welcome John Doe</DropDownMenuHeader>
-          <DropDownMenuDivider />
-          <DropDownMenuItem>Your profile</DropDownMenuItem>
-          <DropDownMenuItem>Explore</DropDownMenuItem>
-          <DropDownMenuItem>Intergerations</DropDownMenuItem>
-          <DropDownMenuItem>Help</DropDownMenuItem>
-          <DropDownMenuDivider />
-          <DropDownMenuItem>Settings</DropDownMenuItem>
-          <DropDownMenuItem>Log out</DropDownMenuItem>
-        </DropDownMenu>
+        <PopoverContent>
+          <DropDownMenu>
+            <DropDownMenuHeader>Welcome John Doe</DropDownMenuHeader>
+            <DropDownMenuDivider />
+            <DropDownMenuItem>Your profile</DropDownMenuItem>
+            <DropDownMenuItem>Explore</DropDownMenuItem>
+            <DropDownMenuItem>Intergerations</DropDownMenuItem>
+            <DropDownMenuItem>Help</DropDownMenuItem>
+            <DropDownMenuDivider />
+            <DropDownMenuItem>Settings</DropDownMenuItem>
+            <DropDownMenuItem>Log out</DropDownMenuItem>
+          </DropDownMenu>
+        </PopoverContent>
       </PopoverContainer>
     );
   }
