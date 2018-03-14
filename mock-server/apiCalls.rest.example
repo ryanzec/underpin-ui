@@ -1,17 +1,28 @@
-GET http://localhost:3001/api/v1/sessions?sessionId=active
+// successful get sessions
+GET http://localhost:3001/api/v1/sessions HTTP/1.1
+x-custom-session: active
 ###
 
-GET http://localhost:3001/api/v1/sessions?sessionId=inactive
+GET http://localhost:3001/api/v1/sessions HTTP/1.1
+x-custom-session: inactive
 ###
 
-GET http://localhost:3001/api/v1/users
+// 401 get session
+GET http://localhost:3001/api/v1/sessions HTTP/1.1
 ###
 
+// get users
+GET http://localhost:3001/api/v1/users HTTP/1.1
+x-custom-session: active
+###
+
+// add user
 POST http://localhost:3001/api/v1/users HTTP/1.1
+x-custom-session: active
 content-type: application/json
 
 {
-  "id": 10,
+  "id": 3,
   "firstName": "Test",
   "lastName": "User",
   "username": "testuser",

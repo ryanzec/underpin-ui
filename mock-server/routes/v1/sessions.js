@@ -1,12 +1,21 @@
 const express = require('express');
-const users = require('../../data/users');
 
-let router = express.Router();
+const userIdMap = {
+  active: 1,
+  inactive: 2,
+};
 
-router.get('/sessions', (request, response) => {
-  const user = request.query.sessionId === 'active' ? users.active : users.inactive;
+module.exports = (database) => {
+  let router = express.Router();
 
-  response.json({user});
-});
+  router.get('/sessions', (request, response) => {
+    const user = database
+      .get('users')
+      .find({id: userIdMap[request.headers['x-custom-session']]})
+      .value();
 
-module.exports = router;
+    response.json({user});
+  });
+
+  return router;
+};

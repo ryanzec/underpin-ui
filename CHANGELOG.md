@@ -8,6 +8,7 @@ There are some key used within the changelog which are as following:
 
 # IN PROGRESS
 
+* enhanced mock server custom route data retrieval pattern
 * fixed display bug for expandable lists
 * more tuning of the main chrome
 * refactored expandable list component

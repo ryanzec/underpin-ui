@@ -2,4 +2,6 @@ const requireUncached = require('require-uncached');
 
 const sessionRoutes = requireUncached('./sessions');
 
-module.exports = [sessionRoutes];
+module.exports = (database) => {
+  return [sessionRoutes(database)];
+};
