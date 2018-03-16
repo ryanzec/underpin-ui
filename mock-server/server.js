@@ -62,4 +62,16 @@ fs.watch(`${SERVER_ROOT}/routes`, {recursive: true}, (event, file) => {
   startServer();
 });
 
+fs.watch(`${SERVER_ROOT}/data`, {recursive: true}, (event, file) => {
+  console.log('data file changes detected, restarting server...'.cyan);
+  server.destroy();
+  startServer();
+});
+
+fs.watch(`${SERVER_ROOT}/utils`, {recursive: true}, (event, file) => {
+  console.log('util changes detected, restarting server...'.cyan);
+  server.destroy();
+  startServer();
+});
+
 startServer();

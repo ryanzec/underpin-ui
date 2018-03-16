@@ -1,8 +1,9 @@
 const express = require('express');
 
 const userIdMap = {
-  active: 1,
+  admin: 1,
   inactive: 2,
+  user: 3,
 };
 
 module.exports = (database) => {
@@ -14,7 +15,13 @@ module.exports = (database) => {
       .find({id: userIdMap[request.headers['x-custom-session']]})
       .value();
 
-    response.json({user});
+    if (!user) {
+      response.status(401).send('Unauthorized');
+
+      return;
+    }
+
+    response.json({session: {user}});
   });
 
   return router;
