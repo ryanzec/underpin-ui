@@ -1,4 +1,4 @@
-const active = {
+const admin = {
   id: 1,
   firstName: 'Test',
   lastName: 'User',
@@ -16,10 +16,20 @@ const inactive = {
   status: 'inactive',
 };
 
-const all = [active, inactive];
+const user = {
+  id: 3,
+  firstName: 'Test',
+  lastName: 'User3',
+  username: 'testuser3',
+  email: 'testuser3@example.com',
+  status: 'active',
+};
+
+const all = [admin, inactive, user];
 
 module.exports = {
-  active,
+  admin,
   inactive,
+  user,
   all,
 };

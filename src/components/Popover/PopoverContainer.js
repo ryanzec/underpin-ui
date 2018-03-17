@@ -65,7 +65,7 @@ export const createOnClickOutside = (instance) => {
 export const createGetPopperStyles = (instance) => {
   return () => {
     const {data} = instance.state;
-    const {offset, isActive} = instance.props;
+    const {offset, isActive, placement} = instance.props;
 
     if (!isActive || !instance.popper || !data) {
       return {
@@ -77,8 +77,52 @@ export const createGetPopperStyles = (instance) => {
       };
     }
 
-    let x = parseInt(data.popper.left, 10) + (offset && offset.x ? offset.x : 0);
-    let y = parseInt(data.popper.top, 10) + (offset && offset.y ? offset.y : 0);
+    let noneFlipChange = false;
+    let xOffset = offset && offset.x ? offset.x : 0;
+    let yOffset = offset && offset.y ? offset.y : 0;
+
+    // @todo: this has only been tested for the common use cases that I expect
+    // @todo: to be used however at some point in the future, this should be
+    // @todo: tested with other variations of popper configurations
+
+    // note sure if the following code is the best way to accomplish what I am
+    // trying to accomplish but it seems like the easiest way to do it that made
+    // sense to me with my limited math skills
+
+    // if the tooltip rotates 90 / 270 degree, we need to inverse the offset
+    // for it to still have the intended effect
+    if (
+      ((~data.placement.indexOf('top') || ~data.placement.indexOf('bottom'))
+        && (~placement.indexOf('left') || ~placement.indexOf('right')))
+      || ((~data.placement.indexOf('left') || ~data.placement.indexOf('right'))
+        && (~placement.indexOf('top') || ~placement.indexOf('bottom')))
+    ) {
+      noneFlipChange = true;
+    }
+
+    if (noneFlipChange) {
+      const oldXOffset = xOffset;
+
+      xOffset = yOffset;
+      yOffset = oldXOffset;
+    }
+
+    // in order to have the offset be move away from handle to be possible and
+    // move toward handle be negative, we need to inverse the sign of the value
+    // in some cases
+    if (
+      ~data.placement.indexOf('left')
+      || ((~data.placement.indexOf('top') || ~data.placement.indexOf('bottom')) && ~data.placement.indexOf('start'))
+    ) {
+      xOffset *= -1;
+    }
+
+    if (~data.placement.indexOf('top')) {
+      yOffset *= -1;
+    }
+
+    let x = parseInt(data.popper.left, 10) + xOffset;
+    let y = parseInt(data.popper.top, 10) + yOffset;
 
     return unchanged.set('transform', `translate3d(${x}px, ${y}px, 0)`, data.styles);
   };
@@ -176,6 +220,12 @@ class PopoverContainer extends PureComponent {
     modifiers: PropTypes.object,
     placement: PropTypes.string,
     flipBoundaries: PropTypes.oneOf(['scrollParent', 'viewport']),
+    // offset is intended to work in the context of positive numbers moving away
+    // from the handle and negative numbers moving towards the handle (large
+    // enough will eventually move the content away once it passes throught the
+    // the handle and starts moving away from the other side) and the
+    // createGetPopperStyles method has logic to adjust the offset according to
+    // it original and current positioning
     offset: PropTypes.object,
     onPlacemenetUpdate: PropTypes.func,
   };
