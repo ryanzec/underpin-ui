@@ -97,7 +97,19 @@ export const linkStyles = (props) => {
  * A Button...
  */
 export const Button = styled.button`
-  ${generateBaseStyles}
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: ${buttonCss.variables.padding};
+  border-radius: ${buttonCss.variables.borderRadius};
+  outline: none;
+  border: none;
+  background-color: ${buttonCss.variables.backgroundColor};
+  color: ${buttonCss.variables.color};
+  font-size: ${buttonCss.variables.fontSize};
+  text-align: center;
+  ${props => props.isPill ? `border-radius: ${structureCss.borderRadius.pill};` : ''};
   ${hoverStyles}
   ${fillStyles}
   ${thinStyles}
