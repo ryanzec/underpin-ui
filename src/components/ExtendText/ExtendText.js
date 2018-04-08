@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
-import React, {PureComponent, createElement} from 'react';
+import React, {PureComponent, createElement, Fragment} from 'react';
 import ReactDOM from 'react-dom';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import DomEventManager from 'src/utils/DomEventManager';
-import cloneDeep from 'lodash/cloneDeep';
 import isArray from 'lodash/isArray';
+import * as unchanged from 'unchanged';
 
 import * as structureCss from 'src/styles/structure';
 import * as themesCss from 'src/styles/themes';
@@ -26,7 +26,7 @@ export const autoCompleteContainerPositionStyles = (props) => {
   const oppositeSide = props.autoCompletePosition === 'bottom' ? 'top' : 'bottom';
   const borderRadius = formCss.variables.inputBorderRadius;
 
-  return `
+  return css`
     ${cssUtils.borderRadius(props.autoCompletePosition, formCss.variables.inputBorderRadius)}
 
     ${oppositeSide}: 100%;
@@ -43,20 +43,26 @@ export const autoCompleteContainerActiveStyles = (props) => {
     ? formCss.variables.borderColorFocusInput
     : themesCss.light.application.borderColor;
 
-  return `
+  return css`
     border: 1px solid ${borderColor};
   `;
 };
 
-export const AutoCompleteContainerStyled = styled.div`
-  position: absolute;
-  width: 100%;
-  z-index: 100;
-  background-color: ${themesCss.light.global.white};
-  max-height: 300px;
-  overflow-y: auto;
+export const autoCompleteContainerStyles = () => {
+  return css`
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+    background-color: ${themesCss.light.global.white};
+    max-height: 300px;
+    overflow-y: auto;
+  `;
+};
 
-  ${autoCompleteContainerActiveStyles} ${autoCompleteContainerPositionStyles};
+export const AutoCompleteContainerStyled = styled.div`
+  ${autoCompleteContainerStyles}
+  ${autoCompleteContainerActiveStyles}
+  ${autoCompleteContainerPositionStyles};
 `;
 
 AutoCompleteContainerStyled.propsTypes = {
@@ -95,7 +101,7 @@ export const autoCompleteTagSpacingStyles = (props) => {
   const top = props.autoCompletePosition === 'bottom' ? 0 : '4px';
   const bottom = props.autoCompletePosition === 'bottom' ? '4px' : 0;
 
-  return `
+  return css`
     margin: ${top} 4px ${bottom} 0;
   `;
 };
@@ -162,13 +168,21 @@ export const DeleteIconStyled = styled(SvgIcon)`
 
 export const createComponentDidMount = (instance) => {
   return () => {
-    instance.domEventManager.add(document, 'mousedown', instance.onClickOutside);
+    // @todo: there is probably a cleaner way to fix this
+    // this may seem a little weird however this is needed it order to allow users of this component to be able
+    // to set the value on blur of the input to a value it is currently is not set to. the mousedown event just
+    // hides the auto complete list in order to prevent a flicker a weirdness.
+    instance.domEventManager.add(document, 'mousedown', () => {
+      instance.setState({
+        isHidden: true,
+      });
+    });
+    instance.domEventManager.add(document, 'click', instance.onClickOutside);
   };
 };
 
 export const createComponentDidUpdate = (instance) => {
   return (previousProps) => {
-    //TODO: can I use previous state?
     if (
       instance.state.isActive === true
       && (instance.state.lastCheckedInputValue === null
@@ -177,7 +191,7 @@ export const createComponentDidUpdate = (instance) => {
       instance.updateAutoCompleteOptions();
     }
 
-    //need to make sure to update in the input value when the prop value change to keep everything in sync
+    // need to make sure to update in the input value when the prop value change to keep everything in sync
     const previousValue = previousProps.value && previousProps.value[0] ? previousProps.value[0].value : null;
     const newValue = instance.props.value && instance.props.value[0] ? instance.props.value[0].value : null;
 
@@ -316,9 +330,8 @@ export const createOnClickClearAll = (instance) => {
 
 export const createOnClickDeleteTag = (instance) => {
   return (event) => {
-    const newValue = cloneDeep(instance.props.value);
-
-    newValue.splice(parseInt(event.currentTarget.getAttribute('data-key'), 10), 1);
+    const removeIndex = parseInt(event.currentTarget.getAttribute('data-key'), 10);
+    const newValue = unchanged.remove(`[${removeIndex}]`, instance.props.value);
 
     instance.setValue(newValue, '');
   };
@@ -371,8 +384,13 @@ export const createGenerateObjectValueFromInput = (instance) => {
 
 export const createSelectActiveItem = (instance) => {
   return () => {
-    if (instance.state.activeAutoCompleteOptions) {
-      instance.updateValue(instance.state.activeAutoCompleteOptions[instance.state.activeAutoCompleteOptionIndex]);
+    if (
+      instance.state.activeAutoCompleteOptions
+      && instance.state.activeAutoCompleteOptions[instance.state.activeAutoCompleteOptionIndex]
+    ) {
+      const filteredAutoCompleteOptions = instance.filterAutoCompleteOptions(instance.state.activeAutoCompleteOptions);
+
+      instance.updateValue(filteredAutoCompleteOptions[instance.state.activeAutoCompleteOptionIndex]);
     }
   };
 };
@@ -410,8 +428,8 @@ export const createSetValue = (instance) => {
       inputValue: newInputValue,
     };
 
-    // NOTE: this allow use to update the tags while keeping the auto complete open since the common use case for
-    // NOTE: tagging is adding multiple items
+    // this allow use to update the tags while keeping the auto complete open since the common use case for
+    // tagging is adding multiple items
     if (instance.addTagKeyCodeEnter || instance.props.multiple) {
       instance.setState(newState);
       instance.addTagKeyCodeEnter = false;
@@ -423,6 +441,7 @@ export const createSetValue = (instance) => {
 
 export const createUpdateAutoCompleteOptions = (instance) => {
   return () => {
+    let exactMatchIndex;
     const newState = {
       lastCheckedInputValue: instance.state.inputValue,
       activeAutoCompleteOptions: [],
@@ -431,7 +450,7 @@ export const createUpdateAutoCompleteOptions = (instance) => {
     if (instance.props.options.length > 0) {
       newState.activeAutoCompleteOptions = instance.filterAutoCompleteOptions(instance.props.options);
 
-      const exactMatchIndex = instance.getExactMatchAutoCompleteOptionIndex(
+      exactMatchIndex = instance.getExactMatchAutoCompleteOptionIndex(
         instance.state.inputValue,
         newState.activeAutoCompleteOptions
       );
@@ -450,11 +469,6 @@ export const createUpdateAutoCompleteOptions = (instance) => {
     }
 
     if (instance.props.allowCreate && newState.activeAutoCompleteOptions && instance.state.inputValue.length > 0) {
-      const exactMatchIndex = instance.getExactMatchAutoCompleteOptionIndex(
-        instance.state.inputValue,
-        newState.activeAutoCompleteOptions
-      );
-
       if (exactMatchIndex === -1) {
         newState.activeAutoCompleteOptions = [instance.generateObjectValueFromInput()].concat(
           newState.activeAutoCompleteOptions
@@ -545,7 +559,7 @@ export const createFilterAutoCompleteOptions = (instance) => {
         }
       }
     } else {
-      filteredOptions = cloneDeep(autoCompleteOptions);
+      filteredOptions = autoCompleteOptions;
     }
 
     return filteredOptions;
@@ -554,15 +568,8 @@ export const createFilterAutoCompleteOptions = (instance) => {
 
 export const createRepositionAutoCompleteContainerToActiveOption = (instance) => {
   return () => {
-    const activeOptionsSelector = `.extend-text__auto-complete-option:nth-child(${instance.state
-      .activeAutoCompleteOptionIndex + 1})`;
-    const autoCompleteContainerNode = ReactDOM.findDOMNode(instance.containerElement).querySelector(
-      '.extend-text__auto-complete-container'
-    );
-    const activeOptionNode = ReactDOM.findDOMNode(instance.containerElement).querySelector(activeOptionsSelector);
-
-    if (activeOptionNode) {
-      autoCompleteContainerNode.scrollTop = activeOptionNode.offsetTop;
+    if (instance.activeOptionElement) {
+      instance.autoCompleteElement.scrollTop = instance.activeOptionElement.offsetTop;
     }
   };
 };
@@ -571,6 +578,7 @@ export const createCloseAutoComplete = (instance) => {
   return (currentValue = instance.props.value, newState = {}) => {
     Object.assign(newState, {
       isActive: false,
+      isHidden: false,
       activeAutoCompleteOptionIndex: null,
       activeAutoCompleteOptions: null,
       lastCheckedInputValue: null,
@@ -633,6 +641,13 @@ export const createSetContainerElement = (instance) => {
   };
 };
 
+//@todo: test
+export const createSetActiveOptionElement = (instance) => {
+  return (element) => {
+    instance.activeOptionElement = element;
+  };
+};
+
 // @todo: replace
 let loadingSvg;
 /*eslint-disable*/
@@ -641,7 +656,7 @@ loadingSvg =
   '<path opacity="0.2" fill="#000" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946 s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634 c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/> <path fill="#000" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0 C22.32,8.481,24.301,9.057,26.013,10.047z"></path>';
 /*eslint-enable*/
 
-class ExtendText extends PureComponent {
+export class ExtendText extends PureComponent {
   static propTypes = {
     options: PropTypes.array,
     asyncOptions: PropTypes.func,
@@ -697,6 +712,7 @@ class ExtendText extends PureComponent {
 
     this.state = {
       isActive: false,
+      isHidden: false,
       isLoading: false,
       activeAutoCompleteOptionIndex: null,
       activeAutoCompleteOptions: null,
@@ -713,6 +729,7 @@ class ExtendText extends PureComponent {
   inputElement = null;
   dropDownElement = null;
   containerElement = null;
+  activeOptionElement = null;
 
   onClickOutside = createOnClickOutside(this);
   onFocusInput = createOnFocusInput(this);
@@ -741,6 +758,7 @@ class ExtendText extends PureComponent {
   setInputElement = createSetInputElement(this);
   setDropDownElement = createSetDropDownElement(this);
   setContainerElement = createSetContainerElement(this);
+  setActiveOptionElement = createSetActiveOptionElement(this);
 
   renderAutoComplete() {
     const {autoCompletePosition} = this.props;
@@ -749,6 +767,7 @@ class ExtendText extends PureComponent {
       const optionNodes = [];
 
       options.forEach((option, key) => {
+        const isOptionActive = key === this.state.activeAutoCompleteOptionIndex;
         let displayNode = null;
 
         if (this.props.optionRenderer) {
@@ -760,9 +779,10 @@ class ExtendText extends PureComponent {
         optionNodes.push(
           <ExtendTextAutoCompleteOption
             data-index={key}
-            isActive={key === this.state.activeAutoCompleteOptionIndex}
+            innerRef={isOptionActive ? this.setActiveOptionElement : null}
+            isActive={isOptionActive}
             key={option.display}
-            onClick={this.onMouseDownAutoCompleteOption}
+            onMouseDown={this.onMouseDownAutoCompleteOption}
             onMouseEnter={this.onMouseEnterAutoCompleteOption}
           >
             {displayNode}
@@ -802,8 +822,8 @@ class ExtendText extends PureComponent {
     return (
       <AutoCompleteContainerStyled
         autoCompletePosition={autoCompletePosition}
+        innerRef={this.setAutoCompleteElement}
         isActive={isActive}
-        ref={this.setAutoCompleteElement}
       >
         {children}
       </AutoCompleteContainerStyled>
@@ -820,6 +840,7 @@ class ExtendText extends PureComponent {
     let tagNodes = [];
 
     this.props.value.forEach((valueObject, key) => {
+      let tagNode;
       const deleteNode = (
         /* eslint-workaround */
         <DeleteIconStyled
@@ -828,15 +849,16 @@ class ExtendText extends PureComponent {
           onClick={this.onClickDeleteTag}
         />
       );
-      let tagNode = (
-        <span>
-          {deleteNode}
-          {valueObject.display}
-        </span>
-      );
 
       if (this.props.tagRenderer) {
         tagNode = this.props.tagRenderer(valueObject, deleteNode);
+      } else {
+        tagNode = (
+          <span>
+            {deleteNode}
+            {valueObject.display}
+          </span>
+        );
       }
 
       tagNodes.push(
@@ -914,70 +936,38 @@ class ExtendText extends PureComponent {
       ...restOfProps
     } = this.props;
     const {isActive} = this.state;
-    let gutsNode = null;
-
-    if (this.props.autoCompletePosition === 'top') {
-      gutsNode = (
-        <span>
-          <InputContainerStyled>
-            <AutoCompleteTextboxStyled
-              autoCompletePosition={autoCompletePosition}
-              disabled={this.props.disabled}
-              isActive={isActive}
-              onChange={this.onChangeInput}
-              onFocus={this.onFocusInput}
-              onKeyDown={this.onKeyDown}
-              placeholder={this.props.placeholder}
-              readOnly={!this.props.isSearchable}
-              ref={this.setInputElement}
-              value={this.state.inputValue}
-            />
-            {this.renderLoadingIndicator()}
-            <DropDownIndicatorStyled
-              icon="KeyboardArrowUp"
-              onClick={this.onClickDropDownIndicator}
-              ref={this.setDropDownElement}
-            />
-            {this.renderAutoComplete()}
-          </InputContainerStyled>
-          {this.renderTags()}
-        </span>
-      );
-    } else {
-      gutsNode = (
-        <span>
-          {this.renderTags()}
-          <InputContainerStyled>
-            <AutoCompleteTextboxStyled
-              autoCompletePosition={autoCompletePosition}
-              disabled={this.props.disabled}
-              isActive={isActive}
-              onChange={this.onChangeInput}
-              onFocus={this.onFocusInput}
-              onKeyDown={this.onKeyDown}
-              placeholder={this.props.placeholder}
-              readOnly={!this.props.isSearchable}
-              ref={this.setInputElement}
-              value={this.state.inputValue}
-            />
-            {this.renderLoadingIndicator()}
-            <DropDownIndicatorStyled
-              icon="KeyboardArrowDown"
-              onClick={this.onClickDropDownIndicator}
-              ref={this.setDropDownElement}
-            />
-            {this.renderAutoComplete()}
-          </InputContainerStyled>
-        </span>
-      );
-    }
+    const icon = this.props.autoCompletePosition === 'top' ? 'KeyboardArrowUp' : 'KeyboardArrowDown';
 
     return (
       <ContainerStyled
-        ref={this.setContainerElement}
+        innerRef={this.setContainerElement}
         {...restOfProps}
       >
-        {gutsNode}
+        <Fragment>
+          {this.props.autoCompletePosition === 'bottom' && this.renderTags()}
+          <InputContainerStyled>
+            <AutoCompleteTextboxStyled
+              autoCompletePosition={autoCompletePosition}
+              disabled={this.props.disabled}
+              isActive={isActive}
+              onChange={this.onChangeInput}
+              onFocus={this.onFocusInput}
+              onKeyDown={this.onKeyDown}
+              placeholder={this.props.placeholder}
+              readOnly={!this.props.isSearchable}
+              ref={this.setInputElement}
+              value={this.state.inputValue}
+            />
+            {this.renderLoadingIndicator()}
+            <DropDownIndicatorStyled
+              icon={icon}
+              innerRef={this.setDropDownElement}
+              onClick={this.onClickDropDownIndicator}
+            />
+            {this.renderAutoComplete()}
+          </InputContainerStyled>
+          {this.props.autoCompletePosition === 'top' && this.renderTags()}
+        </Fragment>
       </ContainerStyled>
     );
   }

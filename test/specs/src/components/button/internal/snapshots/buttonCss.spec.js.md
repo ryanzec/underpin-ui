@@ -1,4 +1,4 @@
-# Snapshot report for `test/specs/src/components/button/internal/buttonCss.spec.js`
+# Snapshot report for `test/specs/src/components/Button/internal/buttonCss.spec.js`
 
 The actual snapshot is saved in `buttonCss.spec.js.snap`.
 

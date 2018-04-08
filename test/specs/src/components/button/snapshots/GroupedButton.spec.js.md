@@ -1,4 +1,4 @@
-# Snapshot report for `test/specs/src/components/button/GroupedButton.spec.js`
+# Snapshot report for `test/specs/src/components/Button/GroupedButton.spec.js`
 
 The actual snapshot is saved in `GroupedButton.spec.js.snap`.
 
